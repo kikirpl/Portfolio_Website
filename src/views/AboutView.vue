@@ -109,7 +109,8 @@ export default {
 </script>
 <template>
   <div
-    class="bg-[#05070f] px-5 py-5 md:px-12 md:py-10 text-left border border-blue-900 rounded-3xl text-slate-200 ml-8 mb-5">
+  
+  class="bg-[#05070f] px-5 py-5 md:px-12 md:py-10 text-left border border-blue-900 rounded-3xl text-slate-200 mx-3 md:mx-8 mb-5 max-w-full">
 
     <article data-page="about">
 

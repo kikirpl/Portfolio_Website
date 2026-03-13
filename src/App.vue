@@ -67,7 +67,7 @@
       <router-link to="/" class="text-gray-400 hover:text-blue-400">Home</router-link>
       <router-link to="/about" class="text-gray-400 hover:text-blue-400">About</router-link>
       <router-link to="/portfolio" class="text-gray-400 hover:text-blue-400">Portfolio</router-link>
-      <router-link to="/blog" class="text-gray-400 hover:text-blue-400">Blog</router-link>
+      <router-link to="/blog" class="text-gray-400 hover:text-blue-400">Experience</router-link>
     </nav>
   </footer>
 </template>
