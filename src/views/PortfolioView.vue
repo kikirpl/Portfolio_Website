@@ -27,7 +27,7 @@ export default {
           name: 'PT DIGITAL PANGAN NUSANTARA',
           imageUrl: 'farmio',
           status: 'Developed a responsive company profile website for a food and deliveries company.',
-          tech: 'HTML, Bootstrap',
+          tech: 'Next JS',
           github: 'null',
           demo: 'https://farmio.id'
         },
