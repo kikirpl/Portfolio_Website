@@ -24,12 +24,12 @@ export default {
         },
         {
           id: 3,
-          name: 'PT Bangun Merah Putih',
-          imageUrl: 'bangun',
-          status: 'Developed a responsive company profile website for a construction and infrastructure company.',
+          name: 'PT DIGITAL PANGAN NUSANTARA',
+          imageUrl: 'farmio',
+          status: 'Developed a responsive company profile website for a food and deliveries company.',
           tech: 'HTML, Bootstrap',
           github: 'null',
-          demo: 'https://bangunmerahputih.com'
+          demo: 'https://farmio.id'
         },
         {
           id: 4,
