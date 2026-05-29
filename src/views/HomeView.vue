@@ -63,7 +63,7 @@ View/Download CV
     name: 'HomeView',
     data() {
       return {
-        toRotate: ["Web Developer", "Full-stack Engineer", "Informatics Student", "Tech Enthusiast"],
+        toRotate: ["Web Developer", "Profesional Trader", "Full-stack Engineer", "Informatics Student", "Tech Enthusiast"],
         period: 2000,
         txt: '',
         loopNum: 0,
