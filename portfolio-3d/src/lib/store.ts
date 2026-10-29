@@ -26,6 +26,8 @@ export interface AppState {
   hovered: number | null;
   /** Project whose panel is in view while scrolling the gallery. */
   focus: number | null;
+  /** Project whose HTML controls have keyboard focus or the mouse: its screen lights up. */
+  highlight: number | null;
   section: string;
   /** Colour of the work currently in view; tints UI and scene. */
   accent: string;
@@ -41,6 +43,7 @@ export const store = createStore<AppState>(() => ({
   active: null,
   hovered: null,
   focus: null,
+  highlight: null,
   section: 'hero',
   accent: MOONLIGHT,
   quality: 'high',

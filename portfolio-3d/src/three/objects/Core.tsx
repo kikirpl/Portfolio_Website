@@ -113,7 +113,14 @@ export function Core({ scale = 1, light = true, interactive = true }: CoreProps)
   return (
     <group scale={scale}>
       <group ref={body}>
-        <mesh geometry={parts.shellGeometry} material={parts.shell} castShadow onClick={onPulse} />
+        <mesh
+          geometry={parts.shellGeometry}
+          material={parts.shell}
+          castShadow
+          onClick={onPulse}
+          onPointerOver={interactive ? () => (document.body.style.cursor = 'pointer') : undefined}
+          onPointerOut={interactive ? () => (document.body.style.cursor = '') : undefined}
+        />
         <lineSegments geometry={parts.edges} material={parts.edgeMaterial} scale={1.002} />
         <group ref={lattice}>
           <mesh geometry={parts.latticeGeometry} material={parts.latticeMaterial} />

@@ -64,8 +64,8 @@ export function Screen({
   );
 
   useFrame((state, delta) => {
-    const { active, focus } = store.getState();
-    const target = hovered || (tracksActive && active === index) ? 1 : 0;
+    const { active, focus, highlight } = store.getState();
+    const target = hovered || highlight === index || (tracksActive && active === index) ? 1 : 0;
     easing.damp(hover.current, 'value', target, 0.2, delta);
     const lit = !dimmable || hovered || (active === null ? focus === null || focus === index : active === index);
     easing.damp(light.current, 'value', lit ? 1 : 0.3, 0.45, delta);

@@ -84,6 +84,15 @@ export function initDialog() {
     else if (prev.active !== null) close(prev.active);
   });
 
+  // A focused or hovered "View project" button lights up its screen in the scene.
+  const highlightFrom = (event: Event) => {
+    const trigger = (event.target as Element | null)?.closest?.<HTMLElement>('[data-open-project]');
+    const highlight = trigger ? Number(trigger.dataset.openProject) : null;
+    if (store.getState().highlight !== highlight) store.setState({ highlight });
+  };
+  document.addEventListener('focusin', highlightFrom);
+  document.addEventListener('pointerover', highlightFrom);
+
   document.addEventListener('click', (event) => {
     const trigger = (event.target as Element).closest<HTMLElement>('[data-open-project]');
     if (!trigger) return;
