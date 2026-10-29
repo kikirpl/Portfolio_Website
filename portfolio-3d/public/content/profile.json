@@ -1,0 +1,126 @@
+{
+  "_generated": {
+    "by": "scripts/import-content.mjs",
+    "source": {
+      "repo": "kikirpl/portfolio_website",
+      "commit": "4df0527"
+    },
+    "note": "Do not edit. Run npm run import; put fixes in content.overrides.json."
+  },
+  "name": "Rizky Maulana Ibrohim",
+  "brand": "RM1",
+  "titleSuffix": "rizkyMaulana(ibrohim);",
+  "greeting": "Hello World, I'm",
+  "roles": [
+    "Web Developer",
+    "Profesional Trader",
+    "Full-stack Engineer",
+    "Informatics Student",
+    "Tech Enthusiast"
+  ],
+  "welcome": "Welcome to My personal website 👋🏼",
+  "headline": "I'm a Full-stack developer with 2+ years of experience building scalable web applications and Web3 platforms.",
+  "about": {
+    "heading": "About Me",
+    "paragraphs": [
+      "Hi everyone! My name is Rizky Maulana Ibrohim. I'm a Full-stack developer with 2+ years of experience building scalable web applications and Web3 platforms. Experienced in developing integrated operational dashboards and managing large-scale datasets (25,000+ products). Proficient in JavaScript, Next.js, React, and Python, with hands-on experience building real-time systems. Currently expanding expertise in UI/UX design to grow as a well-rounded T-shaped developer.",
+      "My job is to build your website to be functional and user-friendly yet still attractive. In addition, I provide a personal touch to your product and ensure that the website catches attention and is easy to use. My goal is to convey your message and identity in the most creative way."
+    ]
+  },
+  "skills": {
+    "heading": "Skills",
+    "groups": [
+      {
+        "label": "Tech Stack",
+        "items": [
+          {
+            "name": "HTML",
+            "detail": "Advanced"
+          },
+          {
+            "name": "CSS",
+            "detail": "Advanced"
+          },
+          {
+            "name": "PHP",
+            "detail": "Advanced"
+          },
+          {
+            "name": "Javascript",
+            "detail": "Advance"
+          },
+          {
+            "name": "Dart",
+            "detail": "Beginner"
+          },
+          {
+            "name": "Next.js",
+            "detail": "Advance"
+          },
+          {
+            "name": "VueJS",
+            "detail": "Intermediate"
+          },
+          {
+            "name": "Python",
+            "detail": "Intermediate"
+          },
+          {
+            "name": "NodeJS",
+            "detail": "Intermediate"
+          },
+          {
+            "name": "Tailwind",
+            "detail": "Advance"
+          },
+          {
+            "name": "Bootstrap",
+            "detail": "Advance"
+          },
+          {
+            "name": "ReactJS",
+            "detail": "Advance"
+          }
+        ]
+      },
+      {
+        "label": "Tools",
+        "items": [
+          {
+            "name": "Git",
+            "detail": "Version Control"
+          },
+          {
+            "name": "GitHub",
+            "detail": "Git Hosting"
+          },
+          {
+            "name": "NPM",
+            "detail": "Package Manager"
+          },
+          {
+            "name": "MySQL",
+            "detail": "Database"
+          }
+        ]
+      }
+    ]
+  },
+  "cv": {
+    "label": "View/Download CV",
+    "href": "/content/files/CV-Rizky-Maulana-Ibrohim.pdf",
+    "fileName": "CV-Rizky-Maulana-Ibrohim.pdf",
+    "bytes": 107959
+  },
+  "contact": {
+    "email": "rizkyibrohim88@gmail.com",
+    "linkedin": {
+      "label": "www.linkedin.com/in/rizky-maulana-617a74296",
+      "url": "https://www.linkedin.com/in/rizky-maulana-617a74296"
+    },
+    "github": {
+      "label": "github.com/kikirpl",
+      "url": "https://github.com/kikirpl"
+    }
+  }
+}

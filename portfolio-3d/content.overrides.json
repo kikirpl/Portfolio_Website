@@ -1,0 +1,40 @@
+{
+  "_readme": "Manual additions that survive `npm run import`. Only fill what the source repo is missing; null keeps the imported value. Keys that start with _ are comments.",
+
+  "hero": {
+    "_headline": "Sentence from About Me shown under the name. null = first sentence that starts with \"I'm\". Or set { \"paragraph\": 0, \"sentence\": 2 } (0-based).",
+    "headline": null
+  },
+
+  "projects": {
+    "_readme": "Keyed by the preview file name without the 'portfolio-' prefix. Fields: name, description, tech (array), links.demo, links.github, hidden, order.",
+    "bangun": {
+      "_todo": "No project entry in the repo. The screenshot shows 'PT Bangun Merah Putih' - confirm and fill in.",
+      "name": null,
+      "description": null,
+      "tech": null,
+      "links": { "demo": null, "github": null }
+    },
+    "bumi": {
+      "_todo": "No project entry in the repo. Probably the PT. Bumi Pangan Export site from Experience - confirm and fill in.",
+      "name": null,
+      "description": null,
+      "tech": null,
+      "links": { "demo": null, "github": null }
+    },
+    "portfolio_v1": {
+      "_todo": "Hidden on purpose: the screenshot shows another person's portfolio ('Bagas Rakha') with their contact details. Set hidden to false only if this is your work, and give it a name.",
+      "hidden": true
+    }
+  },
+
+  "experience": {
+    "_order": "\"start-desc\" = newest first by start month, \"source\" = order in the repo.",
+    "order": "start-desc"
+  },
+
+  "contact": {
+    "_privacy": "The CV also contains a phone number and home address. They are not published unless showPhone is true (the address is never published).",
+    "showPhone": false
+  }
+}
