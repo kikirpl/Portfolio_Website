@@ -37,6 +37,10 @@
   --gutter: clamp(1.25rem, 5vw, 5.5rem);
   --header-h: 4.25rem;
   --radius: 4px;
+  /* Width of a text panel beside the 3D stage (the camera framing leaves this space free). */
+  --column: min(32rem, 34vw);
+  /* Space kept free on the right for the position rail. */
+  --rail-space: 3rem;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
@@ -314,6 +318,12 @@ main {
 .panel {
   position: relative;
   max-width: 34rem;
+}
+
+@media (min-aspect-ratio: 17/20) {
+  .mode-3d main .panel {
+    max-width: var(--column);
+  }
 }
 
 /* Text sits over a lit 3D scene; a soft local shade keeps it legible without a box. */

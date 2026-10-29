@@ -68,7 +68,7 @@ export function Screen({
     const target = hovered || highlight === index || (tracksActive && active === index) ? 1 : 0;
     easing.damp(hover.current, 'value', target, 0.2, delta);
     const lit = !dimmable || hovered || (active === null ? focus === null || focus === index : active === index);
-    easing.damp(light.current, 'value', lit ? 1 : 0.3, 0.45, delta);
+    easing.damp(light.current, 'value', lit ? 1 : 0.16, 0.45, delta);
     const u = display.uniforms;
     easing.damp(u.uHasMap, 'value', texture ? 1 : 0, 0.4, delta);
     const h = hover.current.value;

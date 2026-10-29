@@ -15,7 +15,7 @@ export interface Viewport {
 
 export const WORLD = {
   hero: { center: new Vector3(0, 2.55, 0), ringRadius: 3.4, ringScreenHeight: 0.74, tilt: 0.24 },
-  gallery: { startZ: -18, spacing: 7.5, sideX: 2.7, y: 1.95, height: 1.9, yaw: 0.52 },
+  gallery: { startZ: -18, spacing: 9, sideX: 2.7, y: 1.95, height: 1.9, yaw: 0.52 },
   gates: { gap: 18, spacing: 9, width: 4.6, height: 3.5 },
   beacon: { gap: 14, radius: 2.3, y: 2.7 },
 };
@@ -122,10 +122,10 @@ export function stopPose(key: string, world: World, vp: Viewport): Pose {
   switch (name) {
     case 'hero':
       return frame(WORLD.hero.center, new Vector3(0, 0.2, 1), HERO_WIDTH, 3.7, vp,
-        tall ? { fill: 0.5, maxFillW: 1.45, oy: 0.5 } : { fill: 0.62, maxFillW: 0.46, ox: 0.35 });
+        tall ? { fill: 0.5, maxFillW: 1.45, oy: 0.5 } : { fill: 0.62, maxFillW: 0.44, ox: 0.38 });
     case 'about':
       return frame(WORLD.hero.center, new Vector3(-0.62, 0.7, 0.55), HERO_WIDTH, HERO_WIDTH * 0.7, vp,
-        tall ? { fill: 0.4, maxFillW: 1.05, oy: 0.36 } : { fill: 0.6, maxFillW: 0.42, ox: -0.36 });
+        tall ? { fill: 0.4, maxFillW: 1.05, oy: 0.36 } : { fill: 0.6, maxFillW: 0.42, ox: -0.4 });
     case 'projects':
       return tall
         ? look([0, 8.2, g.startZ + 15], [0, 1.2, g.startZ - 16])
@@ -135,7 +135,9 @@ export function stopPose(key: string, world: World, vp: Viewport): Pose {
       if (!slot) break;
       const dir = slot.normal.clone().setY(0.1);
       return frame(slot.position, dir, slot.width, slot.height, vp,
-        tall ? { fill: 0.34, maxFillW: 0.86, oy: 0.32 } : { fill: 0.5, maxFillW: 0.5, ox: slot.side * 0.24 });
+        tall
+          ? { fill: 0.34, maxFillW: 0.86, oy: 0.32 }
+          : { fill: 0.5, maxFillW: 0.46, ox: slot.side > 0 ? 0.36 : -0.4 });
     }
     case 'experience': {
       const z = world.gates[0]?.z ?? g.startZ;
@@ -146,12 +148,12 @@ export function stopPose(key: string, world: World, vp: Viewport): Pose {
       if (!gate) break;
       const c = new Vector3(0, WORLD.gates.height / 2 + 0.1, gate.z);
       return frame(c, new Vector3(0, 0.06, 1), WORLD.gates.width, WORLD.gates.height, vp,
-        tall ? { fill: 0.5, maxFillW: 1.1, oy: 0.3 } : { fill: 0.66, maxFillW: 0.42, ox: 0.31 });
+        tall ? { fill: 0.5, maxFillW: 1.1, oy: 0.3 } : { fill: 0.66, maxFillW: 0.4, ox: 0.35 });
     }
     case 'contact': {
       const size = 2 * WORLD.beacon.radius + 0.8;
       return frame(world.beacon, new Vector3(0, 0.12, 1), size, size, vp,
-        tall ? { fill: 0.34, maxFillW: 0.85, oy: 0.3 } : { fill: 0.6, maxFillW: 0.45, ox: 0.26 });
+        tall ? { fill: 0.34, maxFillW: 0.85, oy: 0.3 } : { fill: 0.6, maxFillW: 0.4, ox: 0.35 });
     }
   }
   return look([0, 2, 12], [0, 2, 0]);
@@ -161,7 +163,7 @@ export function stopPose(key: string, world: World, vp: Viewport): Pose {
 export function detailPose(slot: ScreenSlot, vp: Viewport): Pose {
   return isTall(vp)
     ? frame(slot.position, slot.normal, slot.width, slot.height, vp, { fill: 0.3, maxFillW: 0.9, oy: 0.5 })
-    : frame(slot.position, slot.normal, slot.width, slot.height, vp, { fill: 0.82, maxFillW: 0.56, ox: -0.355 });
+    : frame(slot.position, slot.normal, slot.width, slot.height, vp, { fill: 0.82, maxFillW: 0.52, ox: -0.38 });
 }
 
 /** Ease with zero velocity at both stops, so the camera settles while a panel is read. */

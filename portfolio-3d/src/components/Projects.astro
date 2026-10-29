@@ -183,7 +183,7 @@ const srcset = (list: { src: string; width: number }[]) => list.map((s) => `${wi
 
   :global(.mode-3d) .project--left .project__panel {
     margin-left: auto;
-    margin-right: clamp(2rem, 6vw, 7rem);
+    margin-right: var(--rail-space);
   }
 
   @media (max-aspect-ratio: 17/20) {

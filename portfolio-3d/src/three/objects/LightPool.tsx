@@ -56,7 +56,7 @@ export function LightPool({ color, width, depth, position, intensity = 0.55, foc
       const { focus, active } = store.getState();
       lit = active === null ? focus === null || focus === focusIndex : active === focusIndex;
     }
-    easing.damp(level.current, 'value', lit ? 1 : 0.25, 0.45, delta);
+    easing.damp(level.current, 'value', lit ? 1 : 0.15, 0.45, delta);
     material.color.copy(base).multiplyScalar(level.current.value);
   });
   return (

@@ -9,8 +9,8 @@ const { about, skills } = Astro.props.profile;
 const groups = skills.groups.filter((g) => g.items.length);
 ---
 
-<section id="about" class="about section" data-section="about" data-stop="about" aria-labelledby="about-title">
-  <div class="panel about__panel">
+<section id="about" class="about section" data-section="about" aria-labelledby="about-title">
+  <div class="panel about__panel" data-stop="about">
     <h2 id="about-title" class="section-title" tabindex="-1" data-reveal="wipe">{about.heading ?? 'About'}</h2>
     <div class="about__text" data-reveal>
       {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
@@ -48,9 +48,12 @@ const groups = skills.groups.filter((g) => g.items.length);
     max-width: 36rem;
   }
 
-  :global(.mode-3d) .about__panel {
-    margin-left: auto;
-    margin-right: clamp(2rem, 6vw, 7rem);
+  @media (min-aspect-ratio: 17/20) {
+    :global(.mode-3d main) .about__panel {
+      margin-left: auto;
+      margin-right: var(--rail-space);
+      max-width: min(36rem, 38vw);
+    }
   }
 
   .about__text {
