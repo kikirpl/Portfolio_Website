@@ -68,17 +68,22 @@ const person = {
         } catch (e) {}
         var gl = false;
         var fast = false;
-        function probe(options) {
-          var ctx = document.createElement('canvas').getContext('webgl2', options);
-          var lose = ctx && ctx.getExtension('WEBGL_lose_context');
-          if (lose) lose.loseContext();
-          return !!ctx;
-        }
         try {
           if (window.WebGL2RenderingContext) {
-            // A software renderer would make the 3D unusable; such devices get the 2D view.
-            fast = probe({ failIfMajorPerformanceCaveat: true });
-            gl = fast || probe({});
+            var strict = document.createElement('canvas').getContext('webgl2', { failIfMajorPerformanceCaveat: true });
+            var ctx = strict || document.createElement('canvas').getContext('webgl2');
+            if (ctx) {
+              gl = true;
+              var renderer = String(ctx.getParameter(ctx.RENDERER) || '');
+              if (/^webkit webgl$/i.test(renderer)) {
+                var info = ctx.getExtension('WEBGL_debug_renderer_info');
+                if (info) renderer = String(ctx.getParameter(info.UNMASKED_RENDERER_WEBGL) || '');
+              }
+              // A software rasteriser makes the 3D unusable; such devices get the 2D view.
+              fast = !!strict && !/swiftshader|llvmpipe|softpipe|software|basic render/i.test(renderer);
+              var lose = ctx.getExtension('WEBGL_lose_context');
+              if (lose) lose.loseContext();
+            }
           }
         } catch (e) {}
         var mode = forced ? forced[1] : stored === '2d' || stored === '3d' ? stored : fast ? '3d' : '2d';

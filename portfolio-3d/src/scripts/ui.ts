@@ -1,7 +1,11 @@
 // Small interface pieces: intro screen, reactive cursor, copy-to-clipboard.
 import { store } from '../lib/store';
 
-/** Intro screen with real loading progress; lifts as soon as the scene is ready (max 6 s). */
+/**
+ * Intro screen with real loading progress. It lifts as soon as the scene is ready, and
+ * never later than 3.5 s: on a slow connection the HTML hero shows while the scene keeps
+ * loading behind it (it fades in when ready, see .webgl in global.css).
+ */
 export function initLoader(onDone: () => void) {
   const el = document.querySelector<HTMLElement>('[data-loader]');
   const fill = el?.querySelector<HTMLElement>('[data-loader-fill]');
@@ -26,7 +30,7 @@ export function initLoader(onDone: () => void) {
       window.setTimeout(finish, s.mode === '2d' ? 0 : 280);
     }
   });
-  window.setTimeout(finish, 6000);
+  window.setTimeout(finish, 3500);
 }
 
 /** A ring that trails the mouse, grows over controls and names the action over 3D screens. */

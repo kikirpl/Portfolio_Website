@@ -85,13 +85,26 @@ export function initDialog() {
   });
 
   // A focused or hovered "View project" button lights up its screen in the scene.
-  const highlightFrom = (event: Event) => {
-    const trigger = (event.target as Element | null)?.closest?.<HTMLElement>('[data-open-project]');
-    const highlight = trigger ? Number(trigger.dataset.openProject) : null;
+  // Keyboard focus wins over the mouse, so a resting pointer cannot clear it on scroll.
+  let byFocus: number | null = null;
+  let byPointer: number | null = null;
+  const projectOf = (target: EventTarget | null) => {
+    const trigger = (target as Element | null)?.closest?.<HTMLElement>('[data-open-project]');
+    return trigger ? Number(trigger.dataset.openProject) : null;
+  };
+  const syncHighlight = () => {
+    const highlight = byFocus ?? byPointer;
     if (store.getState().highlight !== highlight) store.setState({ highlight });
   };
-  document.addEventListener('focusin', highlightFrom);
-  document.addEventListener('pointerover', highlightFrom);
+  document.addEventListener('focusin', (event) => {
+    byFocus = projectOf(event.target);
+    syncHighlight();
+  });
+  document.addEventListener('pointerover', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    byPointer = projectOf(event.target);
+    syncHighlight();
+  });
 
   document.addEventListener('click', (event) => {
     const trigger = (event.target as Element).closest<HTMLElement>('[data-open-project]');

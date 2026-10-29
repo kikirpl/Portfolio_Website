@@ -64,7 +64,7 @@ export function Screen({
   );
 
   useFrame((state, delta) => {
-    const { active, focus, highlight } = store.getState();
+    const { active, focus, highlight, reducedMotion } = store.getState();
     const target = hovered || highlight === index || (tracksActive && active === index) ? 1 : 0;
     easing.damp(hover.current, 'value', target, 0.2, delta);
     const lit = !dimmable || hovered || (active === null ? focus === null || focus === index : active === index);
@@ -74,7 +74,7 @@ export function Screen({
     const h = hover.current.value;
     u.uHover.value = h;
     u.uBrightness.value = (0.86 + 0.14 * h) * light.current.value;
-    u.uTime.value = state.clock.elapsedTime;
+    if (!reducedMotion) u.uTime.value = state.clock.elapsedTime;
     status.color.set(glow).multiplyScalar((0.6 + 1.6 * h) * light.current.value);
     if (lift.current) {
       lift.current.position.z = h * 0.14;

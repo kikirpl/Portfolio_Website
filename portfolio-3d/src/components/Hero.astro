@@ -9,6 +9,8 @@ interface Props {
 
 const { profile, stack } = Astro.props;
 const { greeting, name, roles, headline, cv } = profile;
+const srcset = (list: { src: string; width: number }[]) => list.map((s) => `${withBase(s.src)} ${s.width}w`).join(', ');
+const sizes = '(min-width: 760px) 38vw, 78vw';
 ---
 
 <section id="top" class="hero section" data-section="hero" data-stop="hero" aria-labelledby="hero-title">
@@ -60,14 +62,19 @@ const { greeting, name, roles, headline, cv } = profile;
         (project, i) =>
           project.image && (
             <figure class="hero__screen" style={`--i:${i}; --glow:${project.glow}`}>
-              <img
-                src={withBase(project.image.sources.webp.find((s) => s.width >= 800)?.src ?? project.image.src)}
-                width={project.image.width}
-                height={project.image.height}
-                alt=""
-                loading={i === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
+              <picture>
+                <source type="image/avif" srcset={srcset(project.image.sources.avif)} sizes={sizes} />
+                <source type="image/webp" srcset={srcset(project.image.sources.webp)} sizes={sizes} />
+                <img
+                  src={withBase(project.image.src)}
+                  width={project.image.width}
+                  height={project.image.height}
+                  alt=""
+                  loading={i === stack.length - 1 ? 'eager' : 'lazy'}
+                  fetchpriority={i === stack.length - 1 ? 'high' : 'auto'}
+                  decoding="async"
+                />
+              </picture>
             </figure>
           ),
       )

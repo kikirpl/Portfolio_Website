@@ -13,7 +13,10 @@ const { brand, name, cv, links } = Astro.props;
 ---
 
 <header class="header" data-header>
-  <a class="brand" href="#top" aria-label={`${name}, back to top`}>{brand ?? name}</a>
+  <a class="brand" href="#top">
+    {brand ?? name}
+    {brand && <span class="sr-only">, {name}, back to top</span>}
+  </a>
 
   <p class="header__now data" aria-hidden="true" data-now>About</p>
 

@@ -35,6 +35,9 @@ window.addEventListener(
 );
 
 window.addEventListener('rm1:mode', () => playIntro(reducedMotion));
+store.subscribe((s, prev) => {
+  if (s.ready && !prev.ready) document.documentElement.classList.add('is-scene-ready');
+});
 
 // ?debug exposes the state and scroll helper to automated browser checks.
 if (new URLSearchParams(location.search).has('debug')) {

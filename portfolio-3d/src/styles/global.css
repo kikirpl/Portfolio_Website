@@ -297,6 +297,12 @@ button {
 
 .mode-3d .webgl {
   display: block;
+  opacity: 0;
+  transition: opacity 1200ms var(--ease-out);
+}
+
+.mode-3d.is-scene-ready .webgl {
+  opacity: 1;
 }
 
 main,

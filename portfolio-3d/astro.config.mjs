@@ -13,7 +13,9 @@ export default defineConfig({
   // GitHub Pages project sites live under /<repo>/; set BASE_PATH=/<repo>/ there.
   base: process.env.BASE_PATH || '/',
   devToolbar: { enabled: false },
+  // One small stylesheet: inlining it removes a render-blocking request.
+  build: { inlineStylesheets: 'always' },
   vite: {
-    build: { chunkSizeWarningLimit: 1400 },
+    build: { chunkSizeWarningLimit: 1400, sourcemap: process.env.SOURCEMAP === '1' },
   },
 });

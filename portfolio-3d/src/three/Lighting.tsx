@@ -3,10 +3,10 @@
 // follows the pointer through the dark.
 import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Environment, Lightformer } from '@react-three/drei';
 import { Color, Object3D, Vector3, type DirectionalLight, type PointLight } from 'three';
 import { live, store } from '../lib/store';
 import type { TierSettings } from './quality';
+import { LightPanels } from './LightPanels';
 
 export function Lighting({ settings }: { settings: TierSettings }) {
   const moon = useRef<DirectionalLight>(null);
@@ -58,13 +58,7 @@ export function Lighting({ settings }: { settings: TierSettings }) {
       />
       <primitive object={target} />
       {settings.pointerLight && <pointLight ref={torch} distance={7} decay={1.8} intensity={0} />}
-      <Environment resolution={settings.envResolution} frames={1} environmentIntensity={0.85}>
-        <color attach="background" args={['#030304']} />
-        <Lightformer form="rect" intensity={2.4} color="#dbe3ff" scale={[24, 1.4, 1]} position={[0, 10, -4]} rotation-x={Math.PI / 2} />
-        <Lightformer form="rect" intensity={1.4} color="#9fb2ff" scale={[14, 3, 1]} position={[-12, 4, 0]} rotation-y={Math.PI / 2} />
-        <Lightformer form="rect" intensity={0.9} color="#ffffff" scale={[14, 2, 1]} position={[12, 3, -6]} rotation-y={-Math.PI / 2} />
-        <Lightformer form="ring" intensity={1.6} color="#a9bbff" scale={5} position={[0, 4, 14]} />
-      </Environment>
+      <LightPanels resolution={settings.envResolution} />
     </>
   );
 }

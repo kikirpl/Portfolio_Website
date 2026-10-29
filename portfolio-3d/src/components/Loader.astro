@@ -35,6 +35,18 @@ const { name } = Astro.props;
     visibility: hidden;
   }
 
+  /* If the page script never runs, the intro screen must not cover the page. */
+  :global(.js:not(.js-ready)) .loader {
+    animation: loader-failsafe 0s linear 4s forwards;
+  }
+
+  @keyframes loader-failsafe {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
   .loader__inner {
     display: grid;
     justify-items: center;
