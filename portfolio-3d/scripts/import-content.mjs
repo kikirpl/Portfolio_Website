@@ -22,6 +22,7 @@ import { fileURLToPath } from 'node:url';
 import { readSfc, find, findAll, textOf, attr, hasClass, scriptProperty } from './lib/vue.mjs';
 import { processPreview, removeStale, fileHash, TEXTURE_WIDTHS } from './lib/images.mjs';
 import { parsePeriod, slugify, tidyFileName, sentences, readPdfText, findContact } from './lib/text.mjs';
+import { generateIcons, generateOgImage } from './lib/assets.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'public', 'content');
@@ -501,6 +502,18 @@ async function main() {
     subheading: sourceExperience.subheading,
     order,
     items: experienceItems.map(({ sourceIndex, ...e }) => e),
+  });
+
+  const sitePublic = path.join(ROOT, 'public');
+  await generateIcons(sitePublic);
+  await generateOgImage({
+    publicDir: sitePublic,
+    name: home.name,
+    headline,
+    previews: visibleProjects
+      .filter((p) => p.image && p.source.image)
+      .slice(0, 3)
+      .map((p) => ({ file: path.join(src, p.source.image), glow: p.image.accent ?? '#a9bbff' })),
   });
 
   writeReport({ origin, src, home, about, projects, visibleProjects, experienceItems, contact });

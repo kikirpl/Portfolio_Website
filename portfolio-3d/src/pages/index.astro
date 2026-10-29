@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Rail from '../components/Rail.astro';
+import Loader from '../components/Loader.astro';
+import Cursor from '../components/Cursor.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Projects from '../components/Projects.astro';
+import Experience from '../components/Experience.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import ProjectDialog from '../components/ProjectDialog.astro';
+import { loadContent, sceneData } from '../data/content';
+
+const content = loadContent();
+const { profile, projects, experience } = content;
+const { contact } = profile;
+const hasContact = Boolean(contact.email || contact.linkedin || contact.github || profile.cv);
+
+const links = [
+  { id: 'about', label: 'About', show: profile.about.paragraphs.length > 0 },
+  { id: 'projects', label: 'Projects', show: projects.items.length > 0 },
+  { id: 'experience', label: 'Experience', show: experience.items.length > 0 },
+  { id: 'contact', label: 'Contact', show: hasContact },
+].filter((l) => l.show);
+
+const title = profile.role ? `${profile.name} — ${profile.role}` : `${profile.name} — Portfolio`;
+const description = profile.headline ?? profile.about.paragraphs[0] ?? title;
+const sameAs = [contact.github?.url, contact.linkedin?.url].filter((u): u is string => Boolean(u));
+const scene = JSON.stringify(sceneData(content)).replace(/</g, '\\u003c');
+---
+
+<Base title={title} description={description} name={profile.name} sameAs={sameAs}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <Header brand={profile.brand} name={profile.name} cv={profile.cv} links={links} />
+  <div class="webgl" id="webgl" aria-hidden="true"></div>
+  <Rail links={links} />
+
+  <main id="main" tabindex="-1">
+    <Hero profile={profile} stack={projects.items.filter((p) => p.image).slice(0, 3)} />
+    {profile.about.paragraphs.length > 0 && <About profile={profile} />}
+    {projects.items.length > 0 && <Projects data={projects} />}
+    {experience.items.length > 0 && <Experience data={experience} />}
+    {hasContact && <Contact profile={profile} />}
+  </main>
+
+  <Footer name={profile.name} signature={profile.titleSuffix} />
+  <ProjectDialog />
+  <Loader name={profile.name} />
+  <Cursor />
+
+  <script type="application/json" id="scene-data" set:html={scene} />
+  <script>
+    import '../scripts/main';
+  </script>
+</Base>

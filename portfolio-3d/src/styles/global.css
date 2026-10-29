@@ -1,0 +1,434 @@
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource-variable/martian-mono/wght.css';
+
+/* ------------------------------------------------------------------ tokens */
+
+@property --accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #a9bbff;
+}
+
+:root {
+  color-scheme: dark;
+
+  --ink-0: #07080b;
+  --ink-1: #0b0d12;
+  --ink-2: #11141b;
+  --ink-3: #1a1e27;
+  --line: rgb(214 222 245 / 0.13);
+  --line-strong: rgb(214 222 245 / 0.26);
+  --text-1: #eef1f7;
+  --text-2: #b4bac8;
+  --text-3: #858b9c;
+  --moon: #a9bbff;
+  --accent: var(--moon);
+
+  --font-sans: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Martian Mono Variable', 'Martian Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: clamp(1.125rem, 1.02rem + 0.35vw, 1.3rem);
+  --step-2: clamp(1.5rem, 1.15rem + 1.2vw, 2.35rem);
+  --step-3: clamp(2rem, 1.3rem + 2.6vw, 3.6rem);
+  --step-4: clamp(2.6rem, 1.4rem + 4.6vw, 5.6rem);
+
+  --gutter: clamp(1.25rem, 5vw, 5.5rem);
+  --header-h: 4.25rem;
+  --radius: 4px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  transition: --accent 900ms var(--ease-out);
+}
+
+/* ------------------------------------------------------------------ base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scrollbar-color: var(--line-strong) var(--ink-0);
+  scrollbar-width: thin;
+}
+
+html.is-scroll-locked {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--ink-0);
+  color: var(--text-2);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  caret-color: var(--accent);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 38%, transparent);
+  color: var(--text-1);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink-0);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-3);
+  border: 3px solid var(--ink-0);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--line-strong);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+[tabindex='-1']:focus-visible {
+  outline: none;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--text-1);
+  color: var(--ink-0);
+  font-weight: 600;
+  border-radius: var(--radius);
+  transform: translateY(-160%);
+  transition: transform 200ms var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ------------------------------------------------------------------ type */
+
+.section-title {
+  color: var(--text-1);
+  font-size: var(--step-3);
+  font-weight: 680;
+  font-stretch: 118%;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.section-sub {
+  margin-top: 1rem;
+  color: var(--text-2);
+  font-size: var(--step-1);
+  max-width: 36ch;
+  text-wrap: pretty;
+}
+
+.data {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ actions */
+
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--text-1);
+  --btn-line: var(--line-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.875rem;
+  padding: 0 1.15rem;
+  border: 1px solid var(--btn-line);
+  border-radius: var(--radius);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: 0.9375rem;
+  font-weight: 560;
+  font-stretch: 108%;
+  letter-spacing: 0.005em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 240ms var(--ease-out),
+    border-color 240ms var(--ease-out),
+    color 240ms var(--ease-out),
+    transform 240ms var(--ease-out);
+}
+
+.btn .icon {
+  flex: none;
+  transition: transform 300ms var(--ease-out);
+}
+
+.btn:hover {
+  --btn-line: var(--text-2);
+}
+
+.btn:hover .icon {
+  transform: translateX(3px);
+}
+
+.btn:hover .icon[class*='up-right'] {
+  transform: translate(2px, -2px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primary {
+  --btn-bg: var(--accent);
+  --btn-fg: var(--ink-0);
+  --btn-line: var(--accent);
+}
+
+.btn--primary:hover {
+  --btn-bg: var(--text-1);
+  --btn-line: var(--text-1);
+}
+
+.text-link {
+  color: var(--text-1);
+  text-decoration-line: underline;
+  text-decoration-color: var(--line-strong);
+  transition: text-decoration-color 200ms var(--ease-out);
+}
+
+.text-link:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ page frame */
+
+.webgl {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: none;
+}
+
+.mode-3d .webgl {
+  display: block;
+}
+
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Text shades reach past the gutters; never let them widen the page on phones. */
+main {
+  overflow-x: clip;
+}
+
+.section {
+  position: relative;
+  padding-inline: var(--gutter);
+}
+
+.panel {
+  position: relative;
+  max-width: 34rem;
+}
+
+/* Text sits over a lit 3D scene; a soft local shade keeps it legible without a box. */
+.mode-3d .panel::before {
+  content: '';
+  position: absolute;
+  inset: -3rem -4rem;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgb(7 8 11 / 0.82), rgb(7 8 11 / 0.55) 55%, transparent);
+  pointer-events: none;
+}
+
+/* Centred section titles over the scene get the same soft shade. */
+.mode-3d .section-intro {
+  background: radial-gradient(38rem 13rem at 50% 50%, rgb(7 8 11 / 0.78), rgb(7 8 11 / 0.4) 55%, transparent 80%);
+}
+
+/* In 3D mode the page is a transparent track over the canvas: empty space passes the
+   pointer through to the scene, text and controls keep it. */
+.mode-3d main {
+  pointer-events: none;
+}
+
+.mode-3d main .panel,
+.mode-3d main .section-intro,
+.mode-3d main a,
+.mode-3d main button {
+  pointer-events: auto;
+}
+
+/* While a project is open, the page steps back so only the screen and its panel remain. */
+main,
+.rail {
+  transition: opacity 500ms var(--ease-out);
+}
+
+.is-detail main,
+.is-detail .rail {
+  opacity: 0;
+}
+
+.mode-2d.is-detail main,
+.mode-2d.is-detail .rail {
+  opacity: 1;
+}
+
+/* Background for the 2D version: a still night sky instead of the live scene. */
+.mode-2d body,
+.no-js body {
+  background:
+    radial-gradient(120vmax 70vmax at 85% -10%, rgb(169 187 255 / 0.1), transparent 60%),
+    radial-gradient(90vmax 60vmax at -10% 40%, rgb(169 187 255 / 0.05), transparent 60%),
+    var(--ink-0);
+  background-attachment: fixed;
+}
+
+/* ------------------------------------------------------------------ reveal */
+
+.js [data-reveal],
+.js [data-intro] {
+  transition:
+    opacity 900ms var(--ease-out) var(--d, 0ms),
+    transform 900ms var(--ease-out) var(--d, 0ms),
+    clip-path 1200ms var(--ease-out) var(--d, 0ms);
+}
+
+.js [data-reveal]:not(.is-in),
+.js [data-intro]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.js [data-reveal='wipe']:not(.is-in),
+.js [data-intro='wipe']:not(.is-in) {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 100% 0 0);
+}
+
+.js [data-reveal='wipe'].is-in,
+.js [data-intro='wipe'].is-in {
+  clip-path: inset(0 0 0 0);
+}
+
+/* If the page script never runs, nothing may stay hidden. */
+.js:not(.js-ready) [data-reveal]:not(.is-in),
+.js:not(.js-ready) [data-intro]:not(.is-in) {
+  animation: failsafe 0s linear 3s forwards;
+}
+
+@keyframes failsafe {
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    transition: none;
+  }
+
+  .js [data-reveal],
+  .js [data-reveal]:not(.is-in),
+  .js [data-intro],
+  .js [data-intro]:not(.is-in) {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+
+  .btn,
+  .btn .icon {
+    transition: none;
+  }
+}

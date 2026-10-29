@@ -1,0 +1,256 @@
+---
+import Icon from './Icon.astro';
+import { withBase, type Content } from '../data/content';
+
+interface Props {
+  data: Content['projects'];
+}
+
+const { heading, subheading, items } = Astro.props.data;
+const total = String(items.length).padStart(2, '0');
+const srcset = (list: { src: string; width: number }[]) => list.map((s) => `${withBase(s.src)} ${s.width}w`).join(', ');
+---
+
+<section id="projects" class="projects section" data-section="projects" aria-labelledby="projects-title">
+  <header class="section-intro projects__intro" data-stop="projects">
+    <h2 id="projects-title" class="section-title" tabindex="-1" data-reveal="wipe">{heading ?? 'Projects'}</h2>
+    {subheading && <p class="section-sub" data-reveal>{subheading}</p>}
+  </header>
+
+  <ol class="projects__list">
+    {
+      items.map((project) => (
+        <li
+          class:list={['project', project.index % 2 === 0 ? 'project--right' : 'project--left']}
+          id={`project-${project.slug}`}
+          data-stop={`project:${project.index}`}
+          data-project={project.index}
+          data-glow={project.glow}
+          style={`--glow:${project.glow}`}
+        >
+          <article class="project__article" aria-labelledby={`project-${project.slug}-title`}>
+            {project.image && (
+              <figure class="project__media">
+                <picture>
+                  <source type="image/avif" srcset={srcset(project.image.sources.avif)} sizes="(min-width: 1024px) 56vw, 92vw" />
+                  <source type="image/webp" srcset={srcset(project.image.sources.webp)} sizes="(min-width: 1024px) 56vw, 92vw" />
+                  <img
+                    src={withBase(project.image.src)}
+                    width={project.image.width}
+                    height={project.image.height}
+                    alt={project.image.alt}
+                    loading="lazy"
+                    decoding="async"
+                    style={`background-image:url(${project.image.lqip})`}
+                  />
+                </picture>
+              </figure>
+            )}
+
+            <div class="panel project__panel" data-reveal>
+              <p class="project__count data">
+                <span class="sr-only">Project </span>
+                {project.number}
+                <span aria-hidden="true"> / </span>
+                <span class="sr-only"> of </span>
+                {total}
+              </p>
+              <h3 class="project__name" id={`project-${project.slug}-title`} data-project-name>
+                {project.name}
+              </h3>
+              {project.description && (
+                <p class="project__desc" data-project-desc>
+                  {project.description}
+                </p>
+              )}
+              {project.tech.length > 0 && (
+                <ul class="project__tech data" aria-label="Built with" data-project-tech>
+                  {project.tech.map((tech) => (
+                    <li>{tech}</li>
+                  ))}
+                </ul>
+              )}
+              <div class="project__actions">
+                <button class="btn btn--primary" type="button" data-open-project={project.index} aria-haspopup="dialog">
+                  View project
+                  <Icon name="arrow-right" />
+                </button>
+                <span class="project__links" data-project-links>
+                  {project.links.map((link) => (
+                    <a class="btn" href={link.url} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                      <Icon name="arrow-up-right" />
+                      <span class="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  ))}
+                </span>
+              </div>
+            </div>
+          </article>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .projects__intro {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    min-height: 80svh;
+    text-align: center;
+  }
+
+  .projects__intro .section-sub {
+    margin-inline: auto;
+  }
+
+  .project {
+    display: flex;
+    align-items: center;
+    min-height: 86svh;
+  }
+
+  .project__article {
+    width: 100%;
+  }
+
+  .project__media {
+    display: none;
+  }
+
+  .project__count {
+    color: var(--text-3);
+  }
+
+  .project__name {
+    margin-top: 0.85rem;
+    color: var(--text-1);
+    font-size: var(--step-2);
+    font-weight: 660;
+    font-stretch: 114%;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .project__desc {
+    margin-top: 1rem;
+    max-width: 44ch;
+    text-wrap: pretty;
+  }
+
+  .project__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0;
+    margin-top: 1.25rem;
+    color: var(--glow);
+  }
+
+  .project__tech li:not(:last-child)::after {
+    content: '/';
+    margin: 0 0.55rem;
+    color: var(--text-3);
+  }
+
+  .project__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.75rem;
+  }
+
+  .project__links {
+    display: contents;
+  }
+
+  .project .btn--primary {
+    --btn-bg: var(--glow);
+    --btn-line: var(--glow);
+  }
+
+  .project .btn--primary:hover {
+    --btn-bg: var(--text-1);
+    --btn-line: var(--text-1);
+  }
+
+  /* 3D version: the panel sits opposite the screen it describes. */
+  :global(.mode-3d) .project--right .project__panel {
+    margin-right: auto;
+  }
+
+  :global(.mode-3d) .project--left .project__panel {
+    margin-left: auto;
+    margin-right: clamp(2rem, 6vw, 7rem);
+  }
+
+  @media (max-aspect-ratio: 17/20) {
+    :global(.mode-3d) .project {
+      align-items: flex-end;
+      min-height: 100svh;
+      padding-bottom: 9svh;
+    }
+
+    :global(.mode-3d) .project--left .project__panel {
+      margin: 0;
+    }
+  }
+
+  /* 2D version: the preview is shown as a framed screen beside its panel. */
+  :global(.mode-2d) .projects__intro,
+  :global(.no-js) .projects__intro {
+    min-height: auto;
+    padding-block: clamp(4rem, 10vw, 8rem) clamp(2rem, 5vw, 4rem);
+  }
+
+  :global(.mode-2d) .project,
+  :global(.no-js) .project {
+    min-height: auto;
+    padding-block: clamp(2rem, 5vw, 4rem);
+  }
+
+  :global(.mode-2d) .project__article,
+  :global(.no-js) .project__article {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(1.75rem, 5vw, 5rem);
+    align-items: center;
+  }
+
+  :global(.mode-2d) .project--left .project__media,
+  :global(.no-js) .project--left .project__media {
+    order: 2;
+  }
+
+  :global(.mode-2d) .project__media,
+  :global(.no-js) .project__media {
+    display: block;
+    padding: 6px;
+    background: var(--ink-2);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    box-shadow:
+      0 40px 80px -40px rgb(0 0 0 / 0.9),
+      0 0 120px -50px var(--glow);
+  }
+
+  .project__media img {
+    width: 100%;
+    border-radius: 3px;
+    background-size: cover;
+  }
+
+  @media (max-width: 760px) {
+    :global(.mode-2d) .project__article,
+    :global(.no-js) .project__article {
+      grid-template-columns: 1fr;
+    }
+
+    :global(.mode-2d) .project--left .project__media,
+    :global(.no-js) .project--left .project__media {
+      order: 0;
+    }
+  }
+</style>

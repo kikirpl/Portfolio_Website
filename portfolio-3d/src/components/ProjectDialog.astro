@@ -1,0 +1,330 @@
+---
+import Icon from './Icon.astro';
+---
+
+<dialog class="detail" id="detail" aria-labelledby="detail-title" data-detail>
+  <div class="detail__frame">
+    <div class="detail__media" data-detail-media></div>
+    <div class="detail__body">
+      <div class="detail__top">
+        <p class="detail__count data" data-detail-count></p>
+        <button class="detail__close" type="button" data-detail-close>
+          <span>Close</span>
+          <kbd class="data">Esc</kbd>
+          <Icon name="close" />
+        </button>
+      </div>
+      <h2 class="detail__title" id="detail-title" tabindex="-1" data-detail-title></h2>
+      <p class="detail__desc" data-detail-desc></p>
+      <ul class="detail__tech data" aria-label="Built with" data-detail-tech></ul>
+      <div class="detail__links" data-detail-links></div>
+      <div class="detail__nav">
+        <button class="detail__step" type="button" data-detail-step="-1">
+          <Icon name="chevron-left" />
+          <span class="detail__step-text">
+            <span class="data">Previous</span>
+            <span class="detail__step-name" data-detail-prev></span>
+          </span>
+        </button>
+        <button class="detail__step detail__step--next" type="button" data-detail-step="1">
+          <span class="detail__step-text">
+            <span class="data">Next</span>
+            <span class="detail__step-name" data-detail-next></span>
+          </span>
+          <Icon name="chevron-right" />
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .detail {
+    --glow: var(--accent);
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(32rem, 42vw);
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-2);
+    overflow: visible;
+  }
+
+  .detail::backdrop {
+    background: linear-gradient(to left, rgb(7 8 11 / 0.55), transparent 55%);
+  }
+
+  .detail[open] {
+    display: flex;
+  }
+
+  .detail__frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: calc(var(--header-h) + 1rem) var(--gutter) 2rem 2.5rem;
+    overflow-y: auto;
+    background: linear-gradient(to right, rgb(7 8 11 / 0.75), rgb(7 8 11 / 0.94) 22%);
+    border-left: 1px solid var(--line);
+    overscroll-behavior: contain;
+  }
+
+  .detail__media {
+    display: none;
+  }
+
+  .detail__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .detail__count {
+    color: var(--text-3);
+  }
+
+  .detail__close {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0 0.85rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: none;
+    color: var(--text-1);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: border-color 200ms var(--ease-out);
+  }
+
+  .detail__close:hover {
+    border-color: var(--text-2);
+  }
+
+  @media (pointer: coarse) {
+    .detail__close kbd {
+      display: none;
+    }
+  }
+
+  .detail__close kbd {
+    padding: 0.1rem 0.35rem;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--text-3);
+    font-size: 0.625rem;
+  }
+
+  .detail__title {
+    margin-top: 2.5rem;
+    color: var(--text-1);
+    font-size: var(--step-3);
+    font-weight: 680;
+    font-stretch: 116%;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .detail__desc {
+    margin-top: 1.25rem;
+    color: var(--text-2);
+    font-size: var(--step-1);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .detail__desc:empty,
+  .detail__tech:empty,
+  .detail__links:empty {
+    display: none;
+  }
+
+  .detail__tech {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+    color: var(--glow);
+  }
+
+  .detail__tech :global(li:not(:last-child))::after {
+    content: '/';
+    margin: 0 0.55rem;
+    color: var(--text-3);
+  }
+
+  .detail__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  .detail__links :global(.btn:first-child) {
+    --btn-bg: var(--glow);
+    --btn-fg: var(--ink-0);
+    --btn-line: var(--glow);
+  }
+
+  .detail__links :global(.btn:first-child:hover) {
+    --btn-bg: var(--text-1);
+    --btn-line: var(--text-1);
+  }
+
+  .detail__nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .detail__step {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0.4rem 0;
+    border: 0;
+    background: none;
+    color: var(--text-2);
+    text-align: left;
+    cursor: pointer;
+    transition: color 200ms var(--ease-out);
+  }
+
+  .detail__step--next {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .detail__step:hover {
+    color: var(--text-1);
+  }
+
+  .detail__step-text {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .detail__step-text .data {
+    color: var(--text-3);
+    font-size: 0.6875rem;
+  }
+
+  .detail__step-name {
+    overflow: hidden;
+    font-size: 0.9375rem;
+    font-weight: 540;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Entrance: the panel slides in while the camera flies to the screen. */
+  .detail[open] .detail__frame {
+    animation: detail-in 700ms var(--ease-out) both;
+  }
+
+  @keyframes detail-in {
+    from {
+      opacity: 0;
+      transform: translateX(2.5rem);
+    }
+  }
+
+  /* 3D, portrait screens: a bottom sheet under the screen the camera frames. */
+  @media (max-aspect-ratio: 17/20) {
+    :global(.mode-3d) .detail {
+      inset: auto 0 0 0;
+      width: 100%;
+      height: auto;
+      max-height: 60svh;
+    }
+
+    :global(.mode-3d) .detail::backdrop {
+      background: linear-gradient(to top, rgb(7 8 11 / 0.6), transparent 60%);
+    }
+
+    :global(.mode-3d) .detail__frame {
+      padding: 1.25rem var(--gutter) calc(1.25rem + env(safe-area-inset-bottom));
+      border-left: 0;
+      border-top: 1px solid var(--line);
+      background: rgb(7 8 11 / 0.96);
+    }
+
+    :global(.mode-3d) .detail__title {
+      margin-top: 1rem;
+    }
+
+    :global(.mode-3d) .detail__nav {
+      margin-top: 1.5rem;
+    }
+
+    @keyframes detail-in {
+      from {
+        opacity: 0;
+        transform: translateY(2rem);
+      }
+    }
+  }
+
+  /* 2D version: a centred sheet with the full preview. */
+  :global(.mode-2d) .detail,
+  :global(.no-js) .detail {
+    inset: 0;
+    width: min(76rem, calc(100vw - 2rem));
+    height: fit-content;
+    max-height: calc(100svh - 2rem);
+    margin: auto;
+  }
+
+  :global(.mode-2d) .detail::backdrop {
+    background: rgb(7 8 11 / 0.82);
+  }
+
+  :global(.mode-2d) .detail__frame {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    height: auto;
+    max-height: calc(100svh - 2rem);
+    padding: 1.5rem;
+    background: var(--ink-1);
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+  }
+
+  :global(.mode-2d) .detail__media {
+    display: block;
+  }
+
+  :global(.mode-2d) .detail__media :global(img) {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 760px) {
+    :global(.mode-2d) .detail__frame {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .detail[open] .detail__frame {
+      animation: none;
+    }
+  }
+</style>

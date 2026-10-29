@@ -1,0 +1,73 @@
+---
+interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+---
+
+<div class="loader" aria-hidden="true" data-loader>
+  <div class="loader__inner">
+    <p class="loader__name">{name}</p>
+    <div class="loader__bar"><span class="loader__fill" data-loader-fill></span></div>
+    <p class="loader__count data"><span data-loader-count>0</span>%</p>
+  </div>
+</div>
+
+<style>
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: none;
+    place-items: center;
+    background: var(--ink-0);
+    transition:
+      opacity 700ms var(--ease-out),
+      visibility 0s linear 700ms;
+  }
+
+  :global(.mode-3d) .loader {
+    display: grid;
+  }
+
+  .loader.is-done {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .loader__inner {
+    display: grid;
+    justify-items: center;
+    gap: 1.25rem;
+    width: min(22rem, 80vw);
+  }
+
+  .loader__name {
+    color: var(--text-1);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-stretch: 118%;
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+
+  .loader__bar {
+    width: 100%;
+    height: 1px;
+    overflow: hidden;
+    background: var(--line);
+  }
+
+  .loader__fill {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(var(--p, 0));
+    transform-origin: left;
+    transition: transform 300ms var(--ease-out);
+  }
+
+  .loader__count {
+    color: var(--text-3);
+  }
+</style>

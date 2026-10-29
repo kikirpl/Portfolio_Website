@@ -2,7 +2,7 @@
 
 Dibuat otomatis oleh `npm run import`. Jangan diedit; isi data yang kurang di `content.overrides.json` lalu jalankan impor lagi.
 
-- Sumber: `kikirpl/portfolio_website` @ `4df0527`
+- Sumber: `kikirpl/portfolio_website` @ `b167b09`
 - Nama: Rizky Maulana Ibrohim
 - Proyek: 10 tampil, 1 disembunyikan
 - Pengalaman: 6 entri

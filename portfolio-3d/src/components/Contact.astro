@@ -1,0 +1,216 @@
+---
+import Icon from './Icon.astro';
+import { withBase, type Content } from '../data/content';
+
+interface Props {
+  profile: Content['profile'];
+}
+
+const { contact, cv } = Astro.props.profile;
+const kb = cv ? Math.max(1, Math.round(cv.bytes / 1024)) : 0;
+---
+
+<section id="contact" class="contact section" data-section="contact" data-stop="contact" aria-labelledby="contact-title">
+  <div class="panel contact__panel">
+    <h2 id="contact-title" class="section-title" tabindex="-1" data-reveal="wipe">Contact</h2>
+    <ul class="contact__list" data-reveal>
+      {
+        contact.email && (
+          <li class="contact__item">
+            <a class="contact__link" href={`mailto:${contact.email}`}>
+              <Icon name="mail" />
+              <span class="contact__label data">Email</span>
+              <span class="contact__value">{contact.email}</span>
+            </a>
+            <button class="contact__copy" type="button" data-copy={contact.email}>
+              <Icon name="copy" class="contact__copy-icon" />
+              <Icon name="check" class="contact__done-icon" />
+              <span class="contact__copy-text" data-copy-label>Copy</span>
+              <span class="sr-only">email address</span>
+            </button>
+          </li>
+        )
+      }
+      {
+        contact.linkedin && (
+          <li class="contact__item">
+            <a class="contact__link" href={contact.linkedin.url} target="_blank" rel="noopener noreferrer">
+              <Icon name="linkedin" />
+              <span class="contact__label data">LinkedIn</span>
+              <span class="contact__value">{contact.linkedin.label}</span>
+              <Icon name="arrow-up-right" class="contact__arrow" />
+              <span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        )
+      }
+      {
+        contact.github && (
+          <li class="contact__item">
+            <a class="contact__link" href={contact.github.url} target="_blank" rel="noopener noreferrer">
+              <Icon name="github" />
+              <span class="contact__label data">GitHub</span>
+              <span class="contact__value">{contact.github.label}</span>
+              <Icon name="arrow-up-right" class="contact__arrow" />
+              <span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        )
+      }
+      {
+        contact.phone && (
+          <li class="contact__item">
+            <a class="contact__link" href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}>
+              <span class="contact__label data">Phone</span>
+              <span class="contact__value">{contact.phone}</span>
+            </a>
+          </li>
+        )
+      }
+      {
+        cv && (
+          <li class="contact__item">
+            <a class="contact__link" href={withBase(cv.href)} target="_blank" rel="noopener">
+              <Icon name="file" />
+              <span class="contact__label data">CV</span>
+              <span class="contact__value">
+                {cv.label ?? cv.fileName}
+                <span class="contact__meta data">PDF · {kb} KB</span>
+              </span>
+              <Icon name="download" class="contact__arrow" />
+              <span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        )
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .contact {
+    display: flex;
+    align-items: center;
+    min-height: 100svh;
+    padding-block: 16svh;
+  }
+
+  .contact__panel {
+    max-width: 38rem;
+    width: 100%;
+  }
+
+  .contact__list {
+    margin-top: 2.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact__item {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact__link {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.25rem 5.5rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    min-height: 4rem;
+    padding: 0.75rem 0.25rem;
+    color: var(--text-1);
+    text-decoration: none;
+    transition: color 220ms var(--ease-out);
+  }
+
+  .contact__link .icon {
+    color: var(--text-3);
+    transition: color 220ms var(--ease-out);
+  }
+
+  .contact__label {
+    color: var(--text-3);
+  }
+
+  .contact__value {
+    font-size: var(--step-1);
+    font-weight: 520;
+    overflow-wrap: anywhere;
+  }
+
+  .contact__meta {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--text-3);
+    font-weight: 400;
+  }
+
+  .contact__arrow {
+    transition: transform 300ms var(--ease-out);
+  }
+
+  .contact__link:hover .icon {
+    color: var(--accent);
+  }
+
+  .contact__link:hover .contact__arrow {
+    transform: translate(2px, -2px);
+  }
+
+  .contact__copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 2.75rem;
+    padding: 0 0.75rem;
+    border: 0;
+    border-left: 1px solid var(--line);
+    background: none;
+    color: var(--text-2);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: color 200ms var(--ease-out);
+  }
+
+  .contact__copy:hover {
+    color: var(--text-1);
+  }
+
+  .contact__copy :global(.contact__done-icon),
+  .contact__copy.is-done :global(.contact__copy-icon) {
+    display: none;
+  }
+
+  .contact__copy.is-done :global(.contact__done-icon) {
+    display: block;
+    color: var(--accent);
+  }
+
+  :global(.mode-2d) .contact,
+  :global(.no-js) .contact {
+    min-height: auto;
+    padding-block: clamp(4rem, 10vw, 7rem) clamp(5rem, 12vw, 8rem);
+  }
+
+  @media (max-aspect-ratio: 17/20) {
+    :global(.mode-3d) .contact {
+      align-items: flex-end;
+      padding-block: 40svh 8svh;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .contact__link {
+      grid-template-columns: 1.25rem minmax(0, 1fr) auto;
+    }
+
+    .contact__label {
+      display: none;
+    }
+
+    .contact__copy-text {
+      display: none;
+    }
+  }
+</style>

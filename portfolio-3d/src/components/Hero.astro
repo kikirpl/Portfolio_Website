@@ -1,0 +1,316 @@
+---
+import Icon from './Icon.astro';
+import { withBase, type Content } from '../data/content';
+
+interface Props {
+  profile: Content['profile'];
+  stack: Content['projects']['items'];
+}
+
+const { profile, stack } = Astro.props;
+const { greeting, name, roles, headline, cv } = profile;
+---
+
+<section id="top" class="hero section" data-section="hero" data-stop="hero" aria-labelledby="hero-title">
+  <div class="hero__copy">
+    <h1 id="hero-title" class="hero__title" tabindex="-1">
+      {
+        greeting && (
+          <span class="hero__greeting" data-intro>
+            {greeting}
+            <span class="hero__caret" aria-hidden="true" />
+          </span>
+        )
+      }
+      <span class="hero__name" data-intro="wipe">{name}</span>
+    </h1>
+
+    {
+      roles.length > 0 && (
+        <ul class="hero__roles" aria-label="Roles" data-roles data-intro>
+          {roles.map((role) => (
+            <li>{role}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    {headline && <p class="hero__lead" data-intro>{headline}</p>}
+
+    <div class="hero__actions" data-intro>
+      <a class="btn btn--primary" href="#projects">
+        View projects
+        <Icon name="arrow-right" />
+      </a>
+      {
+        cv && (
+          <a class="btn" href={withBase(cv.href)} target="_blank" rel="noopener">
+            {cv.label ?? 'CV'}
+            <Icon name="download" />
+            <span class="sr-only"> (PDF, opens in a new tab)</span>
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="hero__stack" aria-hidden="true">
+    {
+      stack.map(
+        (project, i) =>
+          project.image && (
+            <figure class="hero__screen" style={`--i:${i}; --glow:${project.glow}`}>
+              <img
+                src={withBase(project.image.sources.webp.find((s) => s.width >= 800)?.src ?? project.image.src)}
+                width={project.image.width}
+                height={project.image.height}
+                alt=""
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </figure>
+          ),
+      )
+    }
+  </div>
+
+  <a class="hero__cue" href="#about" data-intro>
+    <span class="hero__cue-line" aria-hidden="true"></span>
+    <span class="data">Scroll</span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    align-items: center;
+    min-height: 100svh;
+    padding-top: var(--header-h);
+    padding-bottom: 5rem;
+  }
+
+  .hero__copy {
+    position: relative;
+    z-index: 2;
+    max-width: min(44rem, 46vw);
+  }
+
+  .hero__title {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    font-weight: inherit;
+  }
+
+  .hero__greeting {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--text-2);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .hero__caret {
+    width: 0.55em;
+    height: 1.1em;
+    background: var(--accent);
+    animation: caret 1.1s steps(1) infinite;
+  }
+
+  @keyframes caret {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .hero__name {
+    color: var(--text-1);
+    font-size: var(--step-4);
+    font-weight: 720;
+    font-stretch: 116%;
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .hero__roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 0;
+    margin-top: 1.6rem;
+    color: var(--accent);
+    font-size: var(--step-1);
+    font-weight: 500;
+    font-stretch: 104%;
+  }
+
+  .hero__roles li:not(:last-child)::after {
+    content: '/';
+    margin: 0 0.6rem;
+    color: var(--text-3);
+  }
+
+  .hero__lead {
+    margin-top: 1.1rem;
+    max-width: 38ch;
+    color: var(--text-2);
+    font-size: var(--step-1);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .hero__cue {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    color: var(--text-3);
+    text-decoration: none;
+  }
+
+  .hero__cue:hover {
+    color: var(--text-1);
+  }
+
+  .hero__cue-line {
+    position: relative;
+    width: 2.5rem;
+    height: 1px;
+    overflow: hidden;
+    background: var(--line);
+  }
+
+  .hero__cue-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    animation: cue 2.4s var(--ease-in-out) infinite;
+  }
+
+  @keyframes cue {
+    60%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* 2D version: three real previews stand in for the live scene. */
+  .hero__stack {
+    display: none;
+  }
+
+  :global(.mode-2d) .hero,
+  :global(.no-js) .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  :global(.mode-2d) .hero__copy,
+  :global(.no-js) .hero__copy {
+    max-width: 44rem;
+  }
+
+  :global(.mode-2d) .hero__stack,
+  :global(.no-js) .hero__stack {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    perspective: 1800px;
+  }
+
+  .hero__screen {
+    position: absolute;
+    left: calc(var(--i) * 9%);
+    top: calc(var(--i) * 15%);
+    width: 78%;
+    padding: 6px;
+    background: var(--ink-2);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    box-shadow:
+      0 30px 60px -20px rgb(0 0 0 / 0.8),
+      0 0 70px -30px var(--glow);
+    transform: rotateY(-16deg) rotateX(5deg);
+    transform-origin: left center;
+  }
+
+  .hero__screen img {
+    width: 100%;
+    border-radius: 3px;
+  }
+
+  /* 3D version, portrait screens: the ring takes the top of the screen, copy sits below. */
+  @media (max-aspect-ratio: 17/20) {
+    :global(.mode-3d) .hero {
+      align-items: end;
+      padding-top: 44svh;
+      padding-bottom: 4.5rem;
+    }
+
+    :global(.mode-3d) .hero__title {
+      gap: 0.75rem;
+    }
+
+    :global(.mode-3d) .hero__roles {
+      margin-top: 1.1rem;
+    }
+
+    :global(.mode-3d) .hero__actions {
+      margin-top: 1.5rem;
+    }
+
+    :global(.mode-3d) .hero__cue {
+      display: none;
+    }
+
+    :global(.mode-3d) .hero__copy {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero__copy {
+      max-width: none;
+    }
+
+    .hero__actions .btn {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+
+    :global(.mode-2d) .hero,
+    :global(.no-js) .hero {
+      grid-template-columns: 1fr;
+      padding-top: calc(var(--header-h) + 2rem);
+    }
+
+    :global(.mode-2d) .hero__stack,
+    :global(.no-js) .hero__stack {
+      order: -1;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__caret,
+    .hero__cue-line::after {
+      animation: none;
+    }
+  }
+</style>

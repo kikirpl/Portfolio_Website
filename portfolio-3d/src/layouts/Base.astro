@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import archivoUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import { withBase } from '../data/content';
+
+interface Props {
+  title: string;
+  description: string;
+  name: string;
+  sameAs?: string[];
+}
+
+const { title, description, name, sameAs = [] } = Astro.props;
+const site = Astro.site;
+const canonical = site ? new URL(Astro.url.pathname, site).href : null;
+const ogImage = site ? new URL(withBase('/og.png'), site).href : withBase('/og.png');
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name,
+  description,
+  ...(canonical ? { url: canonical } : {}),
+  ...(sameAs.length ? { sameAs } : {}),
+};
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#07080b" />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${name} portfolio`} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={withBase('/favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
+    <link rel="preload" href={archivoUrl} as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
+
+    <!-- Decide 3D or 2D before first paint so the layout never jumps. -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove('no-js');
+        d.classList.add('js');
+        var forced = /[?&]view=(2d|3d)/.exec(location.search);
+        var stored = null;
+        try {
+          stored = localStorage.getItem('rm1-view');
+        } catch (e) {}
+        var gl = false;
+        var fast = false;
+        function probe(options) {
+          var ctx = document.createElement('canvas').getContext('webgl2', options);
+          var lose = ctx && ctx.getExtension('WEBGL_lose_context');
+          if (lose) lose.loseContext();
+          return !!ctx;
+        }
+        try {
+          if (window.WebGL2RenderingContext) {
+            // A software renderer would make the 3D unusable; such devices get the 2D view.
+            fast = probe({ failIfMajorPerformanceCaveat: true });
+            gl = fast || probe({});
+          }
+        } catch (e) {}
+        var mode = forced ? forced[1] : stored === '2d' || stored === '3d' ? stored : fast ? '3d' : '2d';
+        if (!gl) {
+          mode = '2d';
+          d.classList.add('no-webgl');
+        }
+        d.classList.add('mode-' + mode);
+        d.setAttribute('data-mode', mode);
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

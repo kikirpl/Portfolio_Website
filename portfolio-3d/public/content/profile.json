@@ -3,7 +3,7 @@
     "by": "scripts/import-content.mjs",
     "source": {
       "repo": "kikirpl/portfolio_website",
-      "commit": "4df0527"
+      "commit": "b167b09"
     },
     "note": "Do not edit. Run npm run import; put fixes in content.overrides.json."
   },
