@@ -16,14 +16,7 @@ const sizes = '(min-width: 760px) 38vw, 78vw';
 <section id="top" class="hero section" data-section="hero" data-stop="hero" aria-labelledby="hero-title">
   <div class="hero__copy">
     <h1 id="hero-title" class="hero__title" tabindex="-1">
-      {
-        greeting && (
-          <span class="hero__greeting" data-intro>
-            {greeting}
-            <span class="hero__caret" aria-hidden="true" />
-          </span>
-        )
-      }
+      {greeting && <span class="sr-only">{greeting} </span>}
       <span class="hero__name" data-intro="wipe">{name}</span>
     </h1>
 
@@ -83,7 +76,7 @@ const sizes = '(min-width: 760px) 38vw, 78vw';
 
   <a class="hero__cue" href="#about" data-intro>
     <span class="hero__cue-line" aria-hidden="true"></span>
-    <span class="data">Scroll</span>
+    <span class="label">Scroll</span>
   </a>
 </section>
 
@@ -107,30 +100,6 @@ const sizes = '(min-width: 760px) 38vw, 78vw';
     flex-direction: column;
     gap: 1.1rem;
     font-weight: inherit;
-  }
-
-  .hero__greeting {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--text-2);
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-  }
-
-  .hero__caret {
-    width: 0.55em;
-    height: 1.1em;
-    background: var(--accent);
-    animation: caret 1.1s steps(1) infinite;
-  }
-
-  @keyframes caret {
-    50% {
-      opacity: 0;
-    }
   }
 
   .hero__name {
@@ -315,7 +284,6 @@ const sizes = '(min-width: 760px) 38vw, 78vw';
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__caret,
     .hero__cue-line::after {
       animation: none;
     }

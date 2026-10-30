@@ -8,6 +8,8 @@ import { store } from '../lib/store';
 import { fallbackTo2D } from '../scripts/mode';
 import type { QualityTier, SceneData } from '../lib/types';
 
+const LOCKED = new URLSearchParams(location.search).has('lockquality');
+
 // Stable objects: a new object on each render would make R3F re-apply them (and reset the FOV).
 const CAMERA = { fov: 40, near: 0.1, far: 100, position: [0, 3, 14] as [number, number, number] };
 const GL = { antialias: true, alpha: false, stencil: false, powerPreference: 'high-performance' as const };
@@ -48,6 +50,8 @@ export default function App({ data }: { data: SceneData }) {
   const step = useCallback(
     (direction: 1 | -1) =>
       setTier((current) => {
+        // ?lockquality keeps the requested tier (for screenshots and testing).
+        if (LOCKED) return current;
         const next = ORDER[ORDER.indexOf(current) + direction];
         // Never climb above the tier the device started on.
         if (!next || ORDER.indexOf(next) > ORDER.indexOf(start)) return current;
@@ -83,7 +87,7 @@ export default function App({ data }: { data: SceneData }) {
           }}
           onDecline={() => step(-1)}
           onIncline={() => step(1)}
-          onFallback={() => setTier('low')}
+          onFallback={() => !LOCKED && setTier('low')}
         >
           <Suspense fallback={null}>
             <Scene data={data} settings={settings} />

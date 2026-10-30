@@ -14,7 +14,7 @@ export interface Viewport {
 }
 
 export const WORLD = {
-  hero: { center: new Vector3(0, 2.55, 0), ringRadius: 3.4, ringScreenHeight: 0.74, tilt: 0.24 },
+  hero: { center: new Vector3(0, 2.6, 0), ringRadius: 3.7, ringScreenHeight: 1.02, tilt: 0.13 },
   gallery: { startZ: -18, spacing: 9, sideX: 2.7, y: 1.95, height: 1.9, yaw: 0.52 },
   gates: { gap: 18, spacing: 9, width: 4.6, height: 3.5 },
   beacon: { gap: 14, radius: 2.3, y: 2.7 },
@@ -111,7 +111,7 @@ function look(pos: [number, number, number], target: [number, number, number]): 
   return { pos: new Vector3(...pos), target: new Vector3(...target) };
 }
 
-const HERO_WIDTH = 2 * (WORLD.hero.ringRadius + 0.85);
+const HERO_WIDTH = 2 * (WORLD.hero.ringRadius + 1.05);
 
 /** Camera pose for a scroll stop (see data-stop attributes in the page). */
 export function stopPose(key: string, world: World, vp: Viewport): Pose {
@@ -121,8 +121,8 @@ export function stopPose(key: string, world: World, vp: Viewport): Pose {
   const g = WORLD.gallery;
   switch (name) {
     case 'hero':
-      return frame(WORLD.hero.center, new Vector3(0, 0.2, 1), HERO_WIDTH, 3.7, vp,
-        tall ? { fill: 0.5, maxFillW: 1.45, oy: 0.5 } : { fill: 0.62, maxFillW: 0.44, ox: 0.38 });
+      return frame(WORLD.hero.center, new Vector3(0, 0.11, 1), HERO_WIDTH, 3.3, vp,
+        tall ? { fill: 0.5, maxFillW: 1.35, oy: 0.5 } : { fill: 0.7, maxFillW: 0.5, ox: 0.4 });
     case 'about':
       return frame(WORLD.hero.center, new Vector3(-0.62, 0.7, 0.55), HERO_WIDTH, HERO_WIDTH * 0.7, vp,
         tall ? { fill: 0.4, maxFillW: 1.05, oy: 0.36 } : { fill: 0.6, maxFillW: 0.42, ox: -0.4 });
@@ -153,7 +153,7 @@ export function stopPose(key: string, world: World, vp: Viewport): Pose {
     case 'contact': {
       const size = 2 * WORLD.beacon.radius + 0.8;
       return frame(world.beacon, new Vector3(0, 0.12, 1), size, size, vp,
-        tall ? { fill: 0.34, maxFillW: 0.85, oy: 0.3 } : { fill: 0.6, maxFillW: 0.4, ox: 0.35 });
+        tall ? { fill: 0.3, maxFillW: 0.72, oy: 0.5 } : { fill: 0.6, maxFillW: 0.4, ox: 0.35 });
     }
   }
   return look([0, 2, 12], [0, 2, 0]);

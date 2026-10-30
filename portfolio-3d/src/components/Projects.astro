@@ -48,16 +48,18 @@ const srcset = (list: { src: string; width: number }[]) => list.map((s) => `${wi
             )}
 
             <div class="panel project__panel" data-reveal>
-              <p class="project__count data">
-                <span class="sr-only">Project </span>
-                {project.number}
-                <span aria-hidden="true"> / </span>
-                <span class="sr-only"> of </span>
-                {total}
-              </p>
-              <h3 class="project__name" id={`project-${project.slug}-title`} data-project-name>
-                {project.name}
-              </h3>
+              <div class="project__head">
+                <h3 class="project__name" id={`project-${project.slug}-title`} data-project-name>
+                  {project.name}
+                </h3>
+                <p class="project__count data">
+                  <span class="sr-only">Project </span>
+                  {project.number}
+                  <span aria-hidden="true"> / </span>
+                  <span class="sr-only"> of </span>
+                  {total}
+                </p>
+              </div>
               {project.description && (
                 <p class="project__desc" data-project-desc>
                   {project.description}
@@ -120,12 +122,19 @@ const srcset = (list: { src: string; width: number }[]) => list.map((s) => `${wi
     display: none;
   }
 
+  .project__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
   .project__count {
+    flex: none;
     color: var(--text-3);
   }
 
   .project__name {
-    margin-top: 0.85rem;
     color: var(--text-1);
     font-size: var(--step-2);
     font-weight: 660;

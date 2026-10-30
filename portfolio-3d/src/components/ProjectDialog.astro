@@ -7,7 +7,6 @@ import Icon from './Icon.astro';
     <div class="detail__media" data-detail-media></div>
     <div class="detail__body">
       <div class="detail__top">
-        <p class="detail__count data" data-detail-count></p>
         <button class="detail__close" type="button" data-detail-close>
           <span>Close</span>
           <kbd class="data">Esc</kbd>
@@ -22,13 +21,14 @@ import Icon from './Icon.astro';
         <button class="detail__step" type="button" data-detail-step="-1">
           <Icon name="chevron-left" />
           <span class="detail__step-text">
-            <span class="data">Previous</span>
+            <span class="label">Previous</span>
             <span class="detail__step-name" data-detail-prev></span>
           </span>
         </button>
+        <p class="detail__count data" data-detail-count></p>
         <button class="detail__step detail__step--next" type="button" data-detail-step="1">
           <span class="detail__step-text">
-            <span class="data">Next</span>
+            <span class="label">Next</span>
             <span class="detail__step-name" data-detail-next></span>
           </span>
           <Icon name="chevron-right" />
@@ -82,13 +82,13 @@ import Icon from './Icon.astro';
 
   .detail__top {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    justify-content: flex-end;
   }
 
   .detail__count {
+    align-self: center;
     color: var(--text-3);
+    white-space: nowrap;
   }
 
   .detail__close {
@@ -182,7 +182,7 @@ import Icon from './Icon.astro';
 
   .detail__nav {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     gap: 0.75rem;
     margin-top: 3rem;
     padding-top: 1.25rem;
@@ -219,9 +219,8 @@ import Icon from './Icon.astro';
     min-width: 0;
   }
 
-  .detail__step-text .data {
+  .detail__step-text .label {
     color: var(--text-3);
-    font-size: 0.6875rem;
   }
 
   .detail__step-name {

@@ -19,13 +19,15 @@ const { heading, subheading, items } = Astro.props.data;
       items.map((entry) => (
         <li class="entry" data-stop={`exp:${entry.index}`}>
           <article class="panel entry__panel" data-reveal>
-            {entry.period && (
-              <p class="entry__period data" data-start={entry.start} data-end={entry.end}>
-                {entry.period}
-              </p>
-            )}
             <h3 class="entry__role">{entry.role}</h3>
-            {entry.company && <p class="entry__company">{entry.company}</p>}
+            <p class="entry__meta">
+              {entry.company && <span class="entry__company">{entry.company}</span>}
+              {entry.period && (
+                <span class="entry__period data" data-start={entry.start} data-end={entry.end}>
+                  {entry.period}
+                </span>
+              )}
+            </p>
             {entry.description && <p class="entry__desc">{entry.description}</p>}
           </article>
         </li>
@@ -53,12 +55,7 @@ const { heading, subheading, items } = Astro.props.data;
     min-height: 80svh;
   }
 
-  .entry__period {
-    color: var(--accent);
-  }
-
   .entry__role {
-    margin-top: 0.85rem;
     color: var(--text-1);
     font-size: var(--step-2);
     font-weight: 650;
@@ -68,11 +65,22 @@ const { heading, subheading, items } = Astro.props.data;
     text-wrap: balance;
   }
 
+  .entry__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 1rem;
+    margin-top: 0.6rem;
+  }
+
   .entry__company {
-    margin-top: 0.5rem;
     color: var(--text-1);
     font-size: var(--step-1);
     font-weight: 450;
+  }
+
+  .entry__period {
+    color: var(--accent);
   }
 
   .entry__desc {
@@ -115,7 +123,7 @@ const { heading, subheading, items } = Astro.props.data;
     content: '';
     position: absolute;
     left: -4px;
-    top: 0.45rem;
+    top: 0.85rem;
     width: 7px;
     height: 7px;
     border-radius: 50%;

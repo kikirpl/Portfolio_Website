@@ -1,8 +1,8 @@
-// The end of the walk: a standing ring of light around a small core, with a beam
-// rising into the dark. Frames the contact section.
+// The end of the walk: a standing metal ring with a light strip in its inner edge, a
+// small core inside it and a beam rising into the dark. Frames the contact section.
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { AdditiveBlending, Color, DoubleSide, MeshBasicMaterial, ShaderMaterial, type Group, type Vector3 } from 'three';
+import { AdditiveBlending, Color, DoubleSide, MeshBasicMaterial, MeshStandardMaterial, ShaderMaterial, type Group, type Vector3 } from 'three';
 import { Core } from './Core';
 import { LightPool } from './LightPool';
 import { WORLD } from '../layout';
@@ -32,6 +32,7 @@ export function Beacon({ position }: { position: Vector3 }) {
   const ring = useRef<Group>(null);
   const target = useMemo(() => new Color(), []);
   const ringMaterial = useMemo(() => new MeshBasicMaterial({ toneMapped: false }), []);
+  const metal = useMemo(() => new MeshStandardMaterial({ color: '#16181f', metalness: 0.9, roughness: 0.3 }), []);
   const beam = useMemo(
     () =>
       new ShaderMaterial({
@@ -49,9 +50,10 @@ export function Beacon({ position }: { position: Vector3 }) {
   useEffect(
     () => () => {
       ringMaterial.dispose();
+      metal.dispose();
       beam.dispose();
     },
-    [ringMaterial, beam],
+    [ringMaterial, metal, beam],
   );
 
   useFrame((state, delta) => {
@@ -67,11 +69,15 @@ export function Beacon({ position }: { position: Vector3 }) {
   return (
     <group position={position}>
       <group ref={ring}>
-        <mesh material={ringMaterial}>
-          <torusGeometry args={[r, 0.028, 12, 220]} />
+        {/* A brushed-metal ring with a light strip set into its inner edge. */}
+        <mesh material={metal} castShadow>
+          <torusGeometry args={[r, 0.09, 20, 220]} />
         </mesh>
-        <mesh material={ringMaterial} rotation-z={Math.PI / 4}>
-          <torusGeometry args={[r + 0.22, 0.006, 8, 220, Math.PI * 0.6]} />
+        <mesh material={ringMaterial}>
+          <torusGeometry args={[r - 0.085, 0.012, 8, 220]} />
+        </mesh>
+        <mesh material={metal} rotation-z={Math.PI / 4}>
+          <torusGeometry args={[r + 0.28, 0.016, 8, 220, Math.PI * 0.6]} />
         </mesh>
       </group>
       <Core scale={0.62} light={false} interactive={false} />

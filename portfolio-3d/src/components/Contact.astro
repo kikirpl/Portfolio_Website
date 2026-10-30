@@ -19,7 +19,7 @@ const kb = cv ? Math.max(1, Math.round(cv.bytes / 1024)) : 0;
           <li class="contact__item">
             <a class="contact__link" href={`mailto:${contact.email}`}>
               <Icon name="mail" />
-              <span class="contact__label data">Email</span>
+              <span class="contact__label label">Email</span>
               <span class="contact__value">{contact.email}</span>
             </a>
             <button class="contact__copy" type="button" data-copy={contact.email}>
@@ -36,7 +36,7 @@ const kb = cv ? Math.max(1, Math.round(cv.bytes / 1024)) : 0;
           <li class="contact__item">
             <a class="contact__link" href={contact.linkedin.url} target="_blank" rel="noopener noreferrer">
               <Icon name="linkedin" />
-              <span class="contact__label data">LinkedIn</span>
+              <span class="contact__label label">LinkedIn</span>
               <span class="contact__value">{contact.linkedin.label}</span>
               <Icon name="arrow-up-right" class="contact__arrow" />
               <span class="sr-only"> (opens in a new tab)</span>
@@ -49,7 +49,7 @@ const kb = cv ? Math.max(1, Math.round(cv.bytes / 1024)) : 0;
           <li class="contact__item">
             <a class="contact__link" href={contact.github.url} target="_blank" rel="noopener noreferrer">
               <Icon name="github" />
-              <span class="contact__label data">GitHub</span>
+              <span class="contact__label label">GitHub</span>
               <span class="contact__value">{contact.github.label}</span>
               <Icon name="arrow-up-right" class="contact__arrow" />
               <span class="sr-only"> (opens in a new tab)</span>
@@ -61,7 +61,7 @@ const kb = cv ? Math.max(1, Math.round(cv.bytes / 1024)) : 0;
         contact.phone && (
           <li class="contact__item">
             <a class="contact__link" href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}>
-              <span class="contact__label data">Phone</span>
+              <span class="contact__label label">Phone</span>
               <span class="contact__value">{contact.phone}</span>
             </a>
           </li>
@@ -72,7 +72,7 @@ const kb = cv ? Math.max(1, Math.round(cv.bytes / 1024)) : 0;
           <li class="contact__item">
             <a class="contact__link" href={withBase(cv.href)} target="_blank" rel="noopener">
               <Icon name="file" />
-              <span class="contact__label data">CV</span>
+              <span class="contact__label label">CV</span>
               <span class="contact__value">
                 {cv.label ?? cv.fileName}
                 <span class="contact__meta data">PDF · {kb} KB</span>

@@ -22,7 +22,7 @@ const groups = skills.groups.filter((g) => g.items.length);
           {skills.heading && <h3 class="skills__title">{skills.heading}</h3>}
           {groups.map((group) => (
             <div class="skills__group">
-              {group.label && <h4 class="skills__label data">{group.label}</h4>}
+              {group.label && <h4 class="skills__label label">{group.label}</h4>}
               <ul class="skills__list">
                 {group.items.map((item) => (
                   <li>{item.name}</li>

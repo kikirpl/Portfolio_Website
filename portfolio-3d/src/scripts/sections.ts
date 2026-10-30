@@ -46,10 +46,10 @@ export function initSections() {
     const stops = stopEls.map((el) => {
       const key = el.dataset.stop!;
       const { top, height } = box(el);
-      // Centre each panel at its stop; a panel taller than the screen is anchored by its
+      // Centre each stop element; a text panel taller than the screen is anchored by its
       // top instead (below the 3D focal area on portrait screens), so its heading shows.
-      const y =
-        key === 'hero' ? 0 : height > vh * 0.82 ? top - vh * (tall ? 0.44 : 0.14) : top + height / 2 - vh / 2;
+      const tallPanel = el.classList.contains('panel') && height > vh * 0.82;
+      const y = key === 'hero' ? 0 : tallPanel ? top - vh * (tall ? 0.44 : 0.14) : top + height / 2 - vh / 2;
       return { key, y: Math.round(Math.min(maxScroll, Math.max(0, y))) };
     });
     sections = sectionEls.map((el) => {

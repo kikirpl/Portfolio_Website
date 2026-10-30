@@ -47,7 +47,7 @@ const scene = JSON.stringify(sceneData(content)).replace(/</g, '\\u003c');
 
   <Footer name={profile.name} signature={profile.titleSuffix} />
   <ProjectDialog />
-  <Loader name={profile.name} />
+  <Loader name={profile.name} greeting={profile.greeting} />
   <Cursor />
 
   <script type="application/json" id="scene-data" set:html={scene} />

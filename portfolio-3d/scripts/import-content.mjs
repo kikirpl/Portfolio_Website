@@ -75,7 +75,8 @@ function resolveSource(values) {
 
 function sourceInfo(dir) {
   try {
-    const commit = git(['-C', dir, 'rev-parse', '--short', 'HEAD']);
+    // The last commit that touched the old site's own files (not this project's).
+    const commit = git(['-C', dir, 'log', '-1', '--format=%h', '--', 'src', 'public']) || git(['-C', dir, 'rev-parse', '--short', 'HEAD']);
     const remote = git(['-C', dir, 'remote', 'get-url', 'origin']);
     const repo = remote.match(/github\.com[/:]([^/]+\/[^/]+?)(?:\.git)?$/)?.[1] ?? remote.match(/\/git\/([^/]+\/[^/]+?)(?:\.git)?$/)?.[1] ?? null;
     return { repo: repo?.toLowerCase() ?? null, commit };
