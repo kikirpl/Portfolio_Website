@@ -80,7 +80,7 @@ async function writeIfMissing(file, build, force) {
  * Converts one preview into every variant the site needs.
  * Returns the image descriptor stored in projects.json (paths are site-relative).
  */
-export async function processPreview({ input, id, outDir, publicBase, force = false }) {
+export async function processPreview({ input, id, outDir, publicBase, force = false, sizes = RESPONSIVE_WIDTHS }) {
   fs.mkdirSync(outDir, { recursive: true });
   const hash = fileHash(input);
   const meta = await sharp(input).metadata();
@@ -100,7 +100,7 @@ export async function processPreview({ input, id, outDir, publicBase, force = fa
   };
   const url = (name) => `${publicBase}/${name}`;
 
-  const widths = [...new Set([...RESPONSIVE_WIDTHS.filter((w) => w < width), width])];
+  const widths = [...new Set([...sizes.filter((w) => w < width), width])];
   const sources = { avif: [], webp: [] };
   for (const w of widths) {
     const avifName = `${id}-${w}.${hash}.avif`;

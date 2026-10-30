@@ -28,6 +28,12 @@
     }
   },
 
+  "photo": {
+    "_readme": "Profile photo shown in About. null source = the photo the old site uses (src/assets/kiki.jpg). Set source to another file in the old repo, or hidden to true to remove it.",
+    "source": null,
+    "hidden": false
+  },
+
   "experience": {
     "_order": "\"start-desc\" = newest first by start month, \"source\" = order in the repo.",
     "order": "start-desc"

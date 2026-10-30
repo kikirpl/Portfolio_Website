@@ -18,6 +18,8 @@ export const WORLD = {
   gallery: { startZ: -18, spacing: 9, sideX: 2.7, y: 1.95, height: 1.9, yaw: 0.52 },
   gates: { gap: 18, spacing: 9, width: 4.6, height: 3.5 },
   beacon: { gap: 14, radius: 2.3, y: 2.7 },
+  // Left of the entrance, outside the hero ring, turned toward the path the camera takes.
+  portrait: { position: new Vector3(-10.5, 2.5, 2.2), yaw: 0.62, height: 2.5 },
 };
 
 export interface ScreenSlot {
@@ -33,6 +35,8 @@ export interface ScreenSlot {
 
 export interface World {
   slots: ScreenSlot[];
+  /** The profile photo's screen beside About, when there is a photo. */
+  portrait: Omit<ScreenSlot, 'index' | 'side'> | null;
   gates: { index: number; z: number }[];
   beacon: Vector3;
   /** Corridor extent along z, used for the floor and particles. */
@@ -40,7 +44,7 @@ export interface World {
   zMax: number;
 }
 
-export function buildWorld(aspects: number[], gateCount: number): World {
+export function buildWorld(aspects: number[], gateCount: number, portraitAspect: number | null = null): World {
   const g = WORLD.gallery;
   const slots: ScreenSlot[] = aspects.map((aspect, index) => {
     const side = (index % 2 === 0 ? 1 : -1) as 1 | -1;
@@ -62,7 +66,17 @@ export function buildWorld(aspects: number[], gateCount: number): World {
   }));
   const lastGateZ = gates.length ? gates[gates.length - 1].z : lastZ;
   const beacon = new Vector3(0, WORLD.beacon.y, lastGateZ - WORLD.beacon.gap);
-  return { slots, gates, beacon, zMin: beacon.z - 24, zMax: 18 };
+  const p = WORLD.portrait;
+  const portrait = portraitAspect
+    ? {
+        position: p.position.clone(),
+        rotationY: p.yaw,
+        normal: new Vector3(Math.sin(p.yaw), 0, Math.cos(p.yaw)),
+        height: p.height,
+        width: p.height * portraitAspect,
+      }
+    : null;
+  return { slots, portrait, gates, beacon, zMin: beacon.z - 24, zMax: 18 };
 }
 
 export const isTall = (vp: Viewport) => vp.aspect < 0.85;
@@ -124,6 +138,11 @@ export function stopPose(key: string, world: World, vp: Viewport): Pose {
       return frame(WORLD.hero.center, new Vector3(0, 0.11, 1), HERO_WIDTH, 3.3, vp,
         tall ? { fill: 0.5, maxFillW: 1.35, oy: 0.5 } : { fill: 0.7, maxFillW: 0.5, ox: 0.4 });
     case 'about':
+      if (world.portrait) {
+        const p = world.portrait;
+        return frame(p.position, p.normal.clone().setY(0.08), p.width, p.height, vp,
+          tall ? { fill: 0.3, maxFillW: 0.6, oy: 0.46 } : { fill: 0.66, maxFillW: 0.4, ox: -0.4 });
+      }
       return frame(WORLD.hero.center, new Vector3(-0.62, 0.7, 0.55), HERO_WIDTH, HERO_WIDTH * 0.7, vp,
         tall ? { fill: 0.4, maxFillW: 1.05, oy: 0.36 } : { fill: 0.6, maxFillW: 0.42, ox: -0.4 });
     case 'projects':

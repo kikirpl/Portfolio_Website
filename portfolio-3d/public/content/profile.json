@@ -27,6 +27,60 @@
       "My job is to build your website to be functional and user-friendly yet still attractive. In addition, I provide a personal touch to your product and ensure that the website catches attention and is easy to use. My goal is to convey your message and identity in the most creative way."
     ]
   },
+  "photo": {
+    "width": 1375,
+    "height": 1546,
+    "aspect": 0.8894,
+    "src": "/content/images/profile/portrait-800.59909015.webp",
+    "sources": {
+      "avif": [
+        {
+          "src": "/content/images/profile/portrait-400.59909015.avif",
+          "width": 400
+        },
+        {
+          "src": "/content/images/profile/portrait-800.59909015.avif",
+          "width": 800
+        },
+        {
+          "src": "/content/images/profile/portrait-1200.59909015.avif",
+          "width": 1200
+        },
+        {
+          "src": "/content/images/profile/portrait-1375.59909015.avif",
+          "width": 1375
+        }
+      ],
+      "webp": [
+        {
+          "src": "/content/images/profile/portrait-400.59909015.webp",
+          "width": 400
+        },
+        {
+          "src": "/content/images/profile/portrait-800.59909015.webp",
+          "width": 800
+        },
+        {
+          "src": "/content/images/profile/portrait-1200.59909015.webp",
+          "width": 1200
+        },
+        {
+          "src": "/content/images/profile/portrait-1375.59909015.webp",
+          "width": 1375
+        }
+      ]
+    },
+    "texture": {
+      "sm": "/content/images/profile/portrait-tex512.59909015.webp",
+      "md": "/content/images/profile/portrait-tex1024.59909015.webp",
+      "lg": "/content/images/profile/portrait-1375.59909015.webp"
+    },
+    "lqip": "data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAACQBQCdASoYABsAPu1kq06ppaQiKA1RMB2JbACxHxg6gAbvgCQFEHoz4bzcISw9icQYT+28AADOEBF//mtPuqkMyBB0abgJP1tGddmdTZTglMN3+5/FRjQE4qeREGrNy9N7bJhtkO57ZTYq3jUFqeO6ms+AMNPWjpQC2BDagcLB884ZEEYq+Pk2tFQSKSmBKexvc4mYrXP4aet9io5HGAaxd4sME/jE74LZdly6a+Izu5ZSlCyN3+R0TB1VNlOQbqb7IL5KqhEYAAAA",
+    "dominant": "#081828",
+    "accent": "#b47660",
+    "luminance": 0.261,
+    "alt": "Portrait of Rizky Maulana Ibrohim"
+  },
   "skills": {
     "heading": "Skills",
     "groups": [

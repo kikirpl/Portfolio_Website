@@ -36,4 +36,5 @@ Dibuat otomatis oleh `npm run import`. Jangan diedit; isi data yang kurang di `c
 - Email dan LinkedIn diambil dari teks CV `CV-Rizky-Maulana-Ibrohim.pdf` (situs lama tidak punya halaman kontak).
 - CV juga berisi nomor HP dan alamat rumah; keduanya tidak dipublikasikan (lihat `contact.showPhone`).
 - Link LinkedIn di CV ditulis tanpa "https://" (www.linkedin.com/in/rizky-maulana-617a74296); situs menambahkan https:// pada link-nya.
+- Foto profil diambil dari `src/assets/kiki.jpg` (foto yang dipakai di About/Home situs lama); metadata EXIF (kamera, waktu, lokasi) tidak ikut ke file hasil.
 - Kalimat hero diambil dari Tentang Saya: "I'm a Full-stack developer with 2+ years of experience building scalable web applications and Web3 platforms."

@@ -10,6 +10,8 @@ export interface SceneProject {
 export interface SceneData {
   projects: SceneProject[];
   experienceCount: number;
+  /** The profile photo, shown as a portrait screen beside About. */
+  portrait: { aspect: number; textures: { sm: string; md: string; lg: string } } | null;
 }
 
 export type QualityTier = 'low' | 'medium' | 'high';

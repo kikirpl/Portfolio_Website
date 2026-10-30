@@ -10,6 +10,19 @@ const CONTENT_DIR = path.resolve(process.cwd(), 'public/content');
 
 const link = z.string().url().nullable();
 const imageSource = z.object({ src: z.string(), width: z.number() });
+const imageSchema = z.object({
+  width: z.number(),
+  height: z.number(),
+  aspect: z.number(),
+  src: z.string(),
+  sources: z.object({ avif: z.array(imageSource), webp: z.array(imageSource) }),
+  texture: z.object({ sm: z.string(), md: z.string(), lg: z.string() }),
+  lqip: z.string(),
+  dominant: z.string(),
+  accent: z.string().nullable(),
+  luminance: z.number(),
+  alt: z.string(),
+});
 
 const profileSchema = z.object({
   name: z.string(),
@@ -20,6 +33,7 @@ const profileSchema = z.object({
   welcome: z.string().nullable(),
   headline: z.string().nullable(),
   about: z.object({ heading: z.string().nullable(), paragraphs: z.array(z.string()) }),
+  photo: imageSchema.nullable().default(null),
   skills: z.object({
     heading: z.string().nullable(),
     groups: z.array(
@@ -47,21 +61,7 @@ const projectSchema = z.object({
   tech: z.array(z.string()),
   links: z.object({ demo: link, github: link }),
   linkKinds: z.record(z.string(), z.enum(['site', 'prototype', 'github-profile', 'github-repo'])),
-  image: z
-    .object({
-      width: z.number(),
-      height: z.number(),
-      aspect: z.number(),
-      src: z.string(),
-      sources: z.object({ avif: z.array(imageSource), webp: z.array(imageSource) }),
-      texture: z.object({ sm: z.string(), md: z.string(), lg: z.string() }),
-      lqip: z.string(),
-      dominant: z.string(),
-      accent: z.string().nullable(),
-      luminance: z.number(),
-      alt: z.string(),
-    })
-    .nullable(),
+  image: imageSchema.nullable(),
 });
 
 const projectsSchema = z.object({
@@ -155,5 +155,15 @@ export function sceneData(content: Content): SceneData {
         : null,
     })),
     experienceCount: content.experience.items.length,
+    portrait: content.profile.photo
+      ? {
+          aspect: content.profile.photo.aspect,
+          textures: {
+            sm: withBase(content.profile.photo.texture.sm),
+            md: withBase(content.profile.photo.texture.md),
+            lg: withBase(content.profile.photo.texture.lg),
+          },
+        }
+      : null,
   };
 }

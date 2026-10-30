@@ -1,17 +1,38 @@
 ---
-import type { Content } from '../data/content';
+import { withBase, type Content } from '../data/content';
 
 interface Props {
   profile: Content['profile'];
 }
 
-const { about, skills } = Astro.props.profile;
+const { about, skills, photo } = Astro.props.profile;
 const groups = skills.groups.filter((g) => g.items.length);
+const srcset = (list: { src: string; width: number }[]) => list.map((s) => `${withBase(s.src)} ${s.width}w`).join(', ');
+const sizes = '(min-width: 760px) 20rem, 64vw';
 ---
 
 <section id="about" class="about section" data-section="about" aria-labelledby="about-title">
   <div class="panel about__panel" data-stop="about">
     <h2 id="about-title" class="section-title" tabindex="-1" data-reveal="wipe">{about.heading ?? 'About'}</h2>
+    {
+      photo && (
+        <figure class="about__photo" data-reveal>
+          <picture>
+            <source type="image/avif" srcset={srcset(photo.sources.avif)} sizes={sizes} />
+            <source type="image/webp" srcset={srcset(photo.sources.webp)} sizes={sizes} />
+            <img
+              src={withBase(photo.src)}
+              width={photo.width}
+              height={photo.height}
+              alt={photo.alt}
+              loading="lazy"
+              decoding="async"
+              style={`background-image:url(${photo.lqip})`}
+            />
+          </picture>
+        </figure>
+      )
+    }
     <div class="about__text" data-reveal>
       {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
@@ -56,8 +77,34 @@ const groups = skills.groups.filter((g) => g.items.length);
     }
   }
 
+  /* In 3D the photo is a screen in the scene; the page shows it only in the 2D version. */
+  .about__photo {
+    display: none;
+  }
+
+  :global(.mode-2d) .about__photo,
+  :global(.no-js) .about__photo {
+    display: block;
+    width: min(20rem, 100%);
+    margin-top: 2.5rem;
+    padding: 6px;
+    background: var(--ink-2);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    box-shadow:
+      0 40px 80px -40px rgb(0 0 0 / 0.9),
+      0 0 120px -50px var(--moon);
+  }
+
+  .about__photo img {
+    width: 100%;
+    border-radius: 3px;
+    background-size: cover;
+  }
+
   .about__text {
     display: grid;
+    align-content: start;
     gap: 1.1rem;
     margin-top: 2rem;
     max-width: 62ch;
@@ -120,18 +167,34 @@ const groups = skills.groups.filter((g) => g.items.length);
     max-width: 72rem;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    align-content: start;
     column-gap: clamp(2rem, 6vw, 6rem);
+  }
+
+  :global(.mode-2d) .about__panel > .section-title,
+  :global(.no-js) .about__panel > .section-title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  :global(.mode-2d) .about__photo,
+  :global(.no-js) .about__photo {
+    grid-column: 1;
+    grid-row: 2;
   }
 
   :global(.mode-2d) .about__text,
   :global(.no-js) .about__text {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: start;
     margin-top: 0;
-    grid-row: span 2;
   }
 
   :global(.mode-2d) .skills,
   :global(.no-js) .skills {
     grid-column: 1;
+    grid-row: 3;
     margin-top: 2.5rem;
   }
 
@@ -153,8 +216,20 @@ const groups = skills.groups.filter((g) => g.items.length);
       grid-template-columns: 1fr;
     }
 
+    :global(.mode-2d) .about__panel > *,
+    :global(.no-js) .about__panel > * {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
     :global(.mode-2d) .about__text,
     :global(.no-js) .about__text {
+      margin-top: 2rem;
+    }
+
+    :global(.mode-2d) .about__photo,
+    :global(.no-js) .about__photo {
+      width: min(16rem, 64%);
       margin-top: 2rem;
     }
 

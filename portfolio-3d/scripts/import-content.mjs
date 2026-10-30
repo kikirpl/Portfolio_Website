@@ -27,6 +27,7 @@ import { generateIcons, generateOgImage } from './lib/assets.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'public', 'content');
 const IMAGES_OUT = path.join(OUT, 'images', 'projects');
+const PHOTO_OUT = path.join(OUT, 'images', 'profile');
 const FILES_OUT = path.join(OUT, 'files');
 const PUBLIC_BASE = '/content';
 
@@ -94,7 +95,9 @@ function readHome(file) {
   const greeting = elements.slice(0, nameIndex).reverse().find((n) => n.tag === 'p' && textOf(n));
   const welcome = elements.slice(nameIndex + 1).find((n) => n.tag === 'p' && textOf(n));
   const cv = find(template, (n) => n.tag === 'a' && /\.pdf$/i.test(attr(n, 'href') ?? ''));
+  const photo = find(template, (n) => n.tag === 'img' && /^(\.|\/|@)/.test(attr(n, 'src') ?? ''));
   return {
+    photo: photo ? attr(photo, 'src') : null,
     name: nameIndex >= 0 ? textOf(elements[nameIndex]) : null,
     greeting: greeting ? textOf(greeting) : null,
     welcome: welcome ? textOf(welcome) : null,
@@ -117,7 +120,9 @@ function readAbout(file) {
   const heading = about && find(about, (n) => hasClass(n, 'title-section'));
   const tabs = skills ? findAll(skills, (n) => n.tag === 'button').map(textOf) : [];
   const skillsHeading = skills && find(skills, (n) => hasClass(n, 'title-section'));
+  const photo = about && find(about, (n) => n.tag === 'img' && /^(\.|\/|@)/.test(attr(n, 'src') ?? ''));
   return {
+    photo: photo ? attr(photo, 'src') : null,
     heading: heading ? textOf(heading) : null,
     paragraphs: about ? findAll(about, (n) => n.tag === 'p').map(textOf).filter(Boolean) : [],
     skillsHeading: skillsHeading ? textOf(skillsHeading) : null,
@@ -463,6 +468,41 @@ async function main() {
   if (!linkedin) report.todo.push('Link LinkedIn tidak ditemukan.');
   if (linkedin && !/^https?:\/\//i.test(linkedin)) report.notes.push(`Link LinkedIn di CV ditulis tanpa "https://" (${linkedin}); situs menambahkan https:// pada link-nya.`);
 
+  // ------------------------------------------------ profile photo
+  // The old site shows the photo in About (and Home); the same file is used here.
+  const photoOverride = overrides.photo ?? {};
+  const resolvePhoto = (src, viewFile) => {
+    if (!src) return null;
+    if (src.startsWith('@/')) return at(path.join('src', src.slice(2)));
+    if (src.startsWith('/')) return at(path.join(SOURCE.publicDir, src));
+    return path.resolve(path.dirname(at(viewFile)), src);
+  };
+  const photoFile = photoOverride.source
+    ? at(photoOverride.source)
+    : [resolvePhoto(about.photo, SOURCE.about), resolvePhoto(home.photo, SOURCE.home)].find((f) => f && fs.existsSync(f));
+  let photo = null;
+  const keepPhoto = new Set();
+  if (photoOverride.hidden) {
+    report.notes.push('Foto profil disembunyikan lewat `content.overrides.json` (`photo.hidden`).');
+  } else if (photoFile && fs.existsSync(photoFile)) {
+    const { descriptor, files } = await processPreview({
+      input: photoFile,
+      id: 'portrait',
+      outDir: PHOTO_OUT,
+      publicBase: `${PUBLIC_BASE}/images/profile`,
+      force: values.force,
+      sizes: [400, 800, 1200],
+    });
+    files.forEach((f) => keepPhoto.add(f));
+    photo = { ...descriptor, alt: `Portrait of ${home.name}` };
+    report.notes.push(
+      `Foto profil diambil dari \`${path.relative(src, photoFile)}\` (foto yang dipakai di About/Home situs lama); metadata EXIF (kamera, waktu, lokasi) tidak ikut ke file hasil.`,
+    );
+  } else {
+    report.todo.push('Foto profil tidak ditemukan di repo sumber (isi `photo.source` di `content.overrides.json`).');
+  }
+  removeStale(PHOTO_OUT, keepPhoto);
+
   // ------------------------------------------------ hero headline
   let headline = null;
   const headlineOverride = overrides.hero?.headline;
@@ -488,6 +528,7 @@ async function main() {
     welcome: home.welcome,
     headline,
     about: { heading: about.heading, paragraphs: about.paragraphs },
+    photo,
     skills: { heading: about.skillsHeading, groups: skillGroups },
     cv,
     contact,

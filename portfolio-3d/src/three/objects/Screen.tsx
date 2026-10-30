@@ -23,6 +23,8 @@ interface ScreenProps {
   dimmable?: boolean;
   onSelect?: (index: number) => void;
   castShadow?: boolean;
+  /** Read every frame: 0 switches the display off, 1 on. */
+  power?: { value: number };
 }
 
 export function Screen({
@@ -36,6 +38,7 @@ export function Screen({
   dimmable,
   onSelect,
   castShadow = true,
+  power,
 }: ScreenProps) {
   const display = useMemo(() => new ScreenMaterial(), []);
   const status = useMemo(() => new MeshBasicMaterial({ toneMapped: false }), []);
@@ -74,8 +77,9 @@ export function Screen({
     const h = hover.current.value;
     u.uHover.value = h;
     u.uBrightness.value = (0.86 + 0.14 * h) * light.current.value;
+    u.uPower.value = power ? power.value : 1;
     if (!reducedMotion) u.uTime.value = state.clock.elapsedTime;
-    status.color.set(glow).multiplyScalar((0.6 + 1.6 * h) * light.current.value);
+    status.color.set(glow).multiplyScalar((0.6 + 1.6 * h) * light.current.value * (power ? power.value : 1));
     if (lift.current) {
       lift.current.position.z = h * 0.14;
       lift.current.scale.setScalar(1 + h * 0.02);

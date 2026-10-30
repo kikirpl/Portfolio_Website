@@ -26,6 +26,7 @@ const fragmentShader = /* glsl */ `
   uniform float uHasMap;
   uniform vec3 uGlow;
   uniform float uBrightness;
+  uniform float uPower;
   uniform float uHover;
   uniform float uTime;
   uniform vec2 uSize;
@@ -60,7 +61,7 @@ const fragmentShader = /* glsl */ `
     float edge = 1.0 - smoothstep(0.0, 0.04, -d);
     color += uGlow * edge * (0.1 + 0.8 * uHover);
 
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(color * uPower, 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
     #include <fog_fragment>
@@ -77,6 +78,7 @@ export class ScreenMaterial extends ShaderMaterial {
           uHasMap: { value: 0 },
           uGlow: { value: new Color('#a9bbff') },
           uBrightness: { value: 0.88 },
+          uPower: { value: 1 },
           uHover: { value: 0 },
           uTime: { value: 0 },
           uSize: { value: new Vector2(1, 1) },

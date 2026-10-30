@@ -34,10 +34,11 @@ Skrip `scripts/import-content.mjs` **hanya membaca** repo situs lama (Vue) dan m
 
 ```
 public/content/
-  profile.json      nama, sapaan, peran, kalimat hero, Tentang Saya, skills, CV, kontak
+  profile.json      nama, sapaan, peran, kalimat hero, Tentang Saya, foto, skills, CV, kontak
   projects.json     proyek + gambar (AVIF/WebP beberapa ukuran, tekstur WebGL 512/1024 px)
   experience.json   pengalaman (teks persis dari repo, plus tanggal yang bisa diurutkan)
   images/projects/  semua turunan gambar preview (nama file berisi hash isi)
+  images/profile/   foto profil (AVIF/WebP + tekstur 3D, tanpa metadata EXIF)
   files/            CV (PDF)
 IMPORT_REPORT.md    data yang perlu dilengkapi dan data janggal di repo sumber
 public/og.png       kartu Open Graph (dibuat ulang setiap impor)
