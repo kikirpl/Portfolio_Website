@@ -33,9 +33,11 @@ interface LightPoolProps {
   intensity?: number;
   /** Gallery index: the pool fades with its screen when another project is in focus. */
   focusIndex?: number;
+  /** Read every frame, like Screen's power. */
+  power?: { value: number };
 }
 
-export function LightPool({ color, width, depth, position, intensity = 0.55, focusIndex }: LightPoolProps) {
+export function LightPool({ color, width, depth, position, intensity = 0.55, focusIndex, power }: LightPoolProps) {
   const material = useMemo(
     () =>
       new MeshBasicMaterial({
@@ -57,7 +59,7 @@ export function LightPool({ color, width, depth, position, intensity = 0.55, foc
       lit = active === null ? focus === null || focus === focusIndex : active === focusIndex;
     }
     easing.damp(level.current, 'value', lit ? 1 : 0.15, 0.45, delta);
-    material.color.copy(base).multiplyScalar(level.current.value);
+    material.color.copy(base).multiplyScalar(level.current.value * (power ? power.value : 1));
   });
   return (
     <mesh material={material} position={position} rotation-x={-Math.PI / 2} renderOrder={1}>

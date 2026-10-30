@@ -8,6 +8,7 @@ import { HeroRing } from './objects/HeroRing';
 import { Gallery } from './objects/Gallery';
 import { Timeline } from './objects/Timeline';
 import { Beacon } from './objects/Beacon';
+import { Portrait } from './objects/Portrait';
 import { Floor } from './objects/Floor';
 import { Dust, Sky, FOG } from './objects/Atmosphere';
 import { loadTexture, track } from './textures';
@@ -41,7 +42,7 @@ function useIntroReady(data: SceneData) {
 
 export function Scene({ data, settings }: { data: SceneData; settings: TierSettings }) {
   const world = useMemo(
-    () => buildWorld(data.projects.map((p) => p.aspect), data.experienceCount),
+    () => buildWorld(data.projects.map((p) => p.aspect), data.experienceCount, data.portrait?.aspect ?? null),
     [data],
   );
   useIntroReady(data);
@@ -55,6 +56,7 @@ export function Scene({ data, settings }: { data: SceneData; settings: TierSetti
       <Sky />
       <Floor world={world} reflections={settings.reflections} />
       <HeroRing projects={data.projects} />
+      {data.portrait && <Portrait world={world} photo={data.portrait} />}
       <Gallery world={world} projects={data.projects} level={settings.texture} />
       <Timeline world={world} />
       <Beacon position={world.beacon} />
