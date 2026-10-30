@@ -1,0 +1,751 @@
+{
+  "heading": "Past Project Experience",
+  "subheading": "Explore the projects I've worked on so far",
+  "textureWidths": {
+    "sm": 512,
+    "md": 1024
+  },
+  "items": [
+    {
+      "id": "mygold",
+      "slug": "mygold-web3",
+      "name": "MyGold Web3",
+      "nameFromFile": false,
+      "description": "Built the frontend of a Web3 gold tokenization platform with wallet integration, multilingual interface, and modern UI.",
+      "tech": [
+        "Ether JS",
+        "Javascript",
+        "Native"
+      ],
+      "links": {
+        "demo": "https://mygoldtokenization.com",
+        "github": "https://github.com/kikirpl"
+      },
+      "linkKinds": {
+        "demo": "site",
+        "github": "github-profile"
+      },
+      "image": {
+        "width": 1342,
+        "height": 639,
+        "aspect": 2.1002,
+        "src": "/content/images/projects/mygold-800.e37b5388.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/mygold-480.e37b5388.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/mygold-800.e37b5388.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/mygold-1200.e37b5388.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/mygold-1342.e37b5388.avif",
+              "width": 1342
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/mygold-480.e37b5388.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/mygold-800.e37b5388.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/mygold-1200.e37b5388.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/mygold-1342.e37b5388.webp",
+              "width": 1342
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/mygold-tex512.e37b5388.webp",
+          "md": "/content/images/projects/mygold-tex1024.e37b5388.webp",
+          "lg": "/content/images/projects/mygold-1342.e37b5388.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAADwAwCdASoYAAsAPu1iqU2ppaOiMAgBMB2JQBOgBD4Q0TejvdhfoV5oAP6CxvSGGch+Un9o4bcfSHtf3adbP5gGUzfg/iCVeWinTtmpFezv/UJ4DCLonlyj/jV0ch7Q21DlWjRxqa3P7tGxCgX+tQirrgtV5f0tH1XGkL2zioblSEj88NGLSDbBwAA=",
+        "dominant": "#080808",
+        "accent": "#775014",
+        "luminance": 0.184,
+        "alt": "Preview of MyGold Web3"
+      },
+      "source": {
+        "file": "src/views/PortfolioView.vue",
+        "image": "public/img/portfolio-mygold.png"
+      }
+    },
+    {
+      "id": "pangan",
+      "slug": "pt-pangan-makmur-nusantara",
+      "name": "PT. Pangan Makmur Nusantara",
+      "nameFromFile": false,
+      "description": "Responsive company profile website for an agribusiness company specializing in fresh and frozen chicken production, processing, cold storage, and distribution.",
+      "tech": [
+        "HTML",
+        "Bootstrap"
+      ],
+      "links": {
+        "demo": "https://panganmakmurnusantara.com",
+        "github": "https://github.com/kikirpl"
+      },
+      "linkKinds": {
+        "demo": "site",
+        "github": "github-profile"
+      },
+      "image": {
+        "width": 1363,
+        "height": 642,
+        "aspect": 2.1231,
+        "src": "/content/images/projects/pangan-800.980efa4e.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/pangan-480.980efa4e.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/pangan-800.980efa4e.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/pangan-1200.980efa4e.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/pangan-1363.980efa4e.avif",
+              "width": 1363
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/pangan-480.980efa4e.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/pangan-800.980efa4e.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/pangan-1200.980efa4e.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/pangan-1363.980efa4e.webp",
+              "width": 1363
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/pangan-tex512.980efa4e.webp",
+          "md": "/content/images/projects/pangan-tex1024.980efa4e.webp",
+          "lg": "/content/images/projects/pangan-1363.980efa4e.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAwBACdASoYAAsAPu1iqk4ppaQiMAgBMB2JZACdMoR4Lf/gL9s0n2AurYAA/tBdna7HQIH1rSJzvZbp8fB9XtRYtBQ/mLY57rY1q+hCOZHfz/bLRaFuThknUHdxD+bdAD6O1ilQsF7kAAAA",
+        "dominant": "#a81818",
+        "accent": "#72552c",
+        "luminance": 0.331,
+        "alt": "Preview of PT. Pangan Makmur Nusantara"
+      },
+      "source": {
+        "file": "src/views/PortfolioView.vue",
+        "image": "public/img/portfolio-pangan.png"
+      }
+    },
+    {
+      "id": "farmio",
+      "slug": "pt-digital-pangan-nusantara",
+      "name": "PT DIGITAL PANGAN NUSANTARA",
+      "nameFromFile": false,
+      "description": "Developed a responsive company profile website for a food and deliveries company.",
+      "tech": [
+        "Next JS"
+      ],
+      "links": {
+        "demo": "https://farmio.id",
+        "github": null
+      },
+      "linkKinds": {
+        "demo": "site"
+      },
+      "image": {
+        "width": 1350,
+        "height": 644,
+        "aspect": 2.0963,
+        "src": "/content/images/projects/farmio-800.cd8f24cd.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/farmio-480.cd8f24cd.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/farmio-800.cd8f24cd.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/farmio-1200.cd8f24cd.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/farmio-1350.cd8f24cd.avif",
+              "width": 1350
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/farmio-480.cd8f24cd.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/farmio-800.cd8f24cd.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/farmio-1200.cd8f24cd.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/farmio-1350.cd8f24cd.webp",
+              "width": 1350
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/farmio-tex512.cd8f24cd.webp",
+          "md": "/content/images/projects/farmio-tex1024.cd8f24cd.webp",
+          "lg": "/content/images/projects/farmio-1350.cd8f24cd.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAACwAwCdASoYAAsAPu1krU2ppaSiMAgBMB2JYgAAW4OAqwbz6glyAAD+6yciQo+H8ObWL6OBYg+OxY8D4nlCPmJAPRQBcqWcjD/kfX0QjtijRLOu3ugya/R0wsN6V0DnvvE4IZoqPHL+j/6mHy+7QnzV6wx4QT+7sVPTY8VLiAA=",
+        "dominant": "#f8f8e8",
+        "accent": "#f9a639",
+        "luminance": 0.897,
+        "alt": "Preview of PT DIGITAL PANGAN NUSANTARA"
+      },
+      "source": {
+        "file": "src/views/PortfolioView.vue",
+        "image": "public/img/portfolio-farmio.png"
+      }
+    },
+    {
+      "id": "meat",
+      "slug": "fortuna-meat-x",
+      "name": "Fortuna Meat X",
+      "nameFromFile": false,
+      "description": "Developed a responsive company website for a meat supply company offering premium beef and chicken products.",
+      "tech": [
+        "HTML",
+        "Bootstrap"
+      ],
+      "links": {
+        "demo": "https://fortunameatx.com",
+        "github": null
+      },
+      "linkKinds": {
+        "demo": "site"
+      },
+      "image": {
+        "width": 1363,
+        "height": 645,
+        "aspect": 2.1132,
+        "src": "/content/images/projects/meat-800.e7b17b61.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/meat-480.e7b17b61.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/meat-800.e7b17b61.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/meat-1200.e7b17b61.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/meat-1363.e7b17b61.avif",
+              "width": 1363
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/meat-480.e7b17b61.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/meat-800.e7b17b61.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/meat-1200.e7b17b61.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/meat-1363.e7b17b61.webp",
+              "width": 1363
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/meat-tex512.e7b17b61.webp",
+          "md": "/content/images/projects/meat-tex1024.e7b17b61.webp",
+          "lg": "/content/images/projects/meat-1363.e7b17b61.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAAAQBACdASoYAAsAPu1iqU2ppaQiMAgBMB2JagCdACHw9bDZBESctxcQYAD+7z3EdqSeZaXwdsFaK/pVfgxOrHJVa3WUX6nNZ45XkeHdVtwhEP3TyqaI8lWcjqjx+9fl7oc6ItQBo+gq1z9CK3/vjARbfkb61K6KxSXi8/t1mMPxHeMnutNLgAAA",
+        "dominant": "#080848",
+        "accent": "#065262",
+        "luminance": 0.216,
+        "alt": "Preview of Fortuna Meat X"
+      },
+      "source": {
+        "file": "src/views/PortfolioView.vue",
+        "image": "public/img/portfolio-meat.png"
+      }
+    },
+    {
+      "id": "fortuna",
+      "slug": "fortuna-poultry",
+      "name": "Fortuna Poultry",
+      "nameFromFile": false,
+      "description": "Responsive company profile website for an integrated poultry agribusiness company.",
+      "tech": [
+        "HTML",
+        "Bootstrap"
+      ],
+      "links": {
+        "demo": "https://fortunapoultry.com",
+        "github": null
+      },
+      "linkKinds": {
+        "demo": "site"
+      },
+      "image": {
+        "width": 1361,
+        "height": 641,
+        "aspect": 2.1232,
+        "src": "/content/images/projects/fortuna-800.35cd0707.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/fortuna-480.35cd0707.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/fortuna-800.35cd0707.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/fortuna-1200.35cd0707.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/fortuna-1361.35cd0707.avif",
+              "width": 1361
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/fortuna-480.35cd0707.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/fortuna-800.35cd0707.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/fortuna-1200.35cd0707.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/fortuna-1361.35cd0707.webp",
+              "width": 1361
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/fortuna-tex512.35cd0707.webp",
+          "md": "/content/images/projects/fortuna-tex1024.35cd0707.webp",
+          "lg": "/content/images/projects/fortuna-1361.35cd0707.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAAAQBACdASoYAAsAPu1kq04ppaQiMAgBMB2JYwCsACHQX9IDnrNrkDLvgAD8j/YtIASpVtWDLrFqmqYLd6NbcvGLUihQfPQNWPCzk9xdCdEfzsVlu/5Un+WmvtXq978g0irA7gc9nFtazjrtlAA=",
+        "dominant": "#584838",
+        "accent": "#614c3d",
+        "luminance": 0.493,
+        "alt": "Preview of Fortuna Poultry"
+      },
+      "source": {
+        "file": "src/views/PortfolioView.vue",
+        "image": "public/img/portfolio-fortuna.png"
+      }
+    },
+    {
+      "id": "baraka",
+      "slug": "pt-baraka-dhahabu-africa",
+      "name": "PT Baraka Dhahabu Africa",
+      "nameFromFile": false,
+      "description": "Developed a responsive company website for a gold trading company connecting Africa’s gold resources with the global market.",
+      "tech": [
+        "React JS",
+        "Tailwind"
+      ],
+      "links": {
+        "demo": "https://barakadhahabuafrica.com",
+        "github": null
+      },
+      "linkKinds": {
+        "demo": "site"
+      },
+      "image": {
+        "width": 1354,
+        "height": 621,
+        "aspect": 2.1804,
+        "src": "/content/images/projects/baraka-800.c39cbbd3.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/baraka-480.c39cbbd3.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/baraka-800.c39cbbd3.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/baraka-1200.c39cbbd3.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/baraka-1354.c39cbbd3.avif",
+              "width": 1354
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/baraka-480.c39cbbd3.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/baraka-800.c39cbbd3.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/baraka-1200.c39cbbd3.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/baraka-1354.c39cbbd3.webp",
+              "width": 1354
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/baraka-tex512.c39cbbd3.webp",
+          "md": "/content/images/projects/baraka-tex1024.c39cbbd3.webp",
+          "lg": "/content/images/projects/baraka-1354.c39cbbd3.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADQAwCdASoYAAsAPu1mqk4ppaOiMAgBMB2JYwCdMoAC++6DCLIVYAAA/vLKtOr14kJAPzcjnkYqqbfSamGBLj1AcVWYw48edyQT4D5rmG+lkp8I3OP0khebgjwAAA==",
+        "dominant": "#080808",
+        "accent": "#a36a0b",
+        "luminance": 0.093,
+        "alt": "Preview of PT Baraka Dhahabu Africa"
+      },
+      "source": {
+        "file": "src/views/PortfolioView.vue",
+        "image": "public/img/portfolio-baraka.png"
+      }
+    },
+    {
+      "id": "sanjungan",
+      "slug": "pt-sanjungan-emas-mulia",
+      "name": "PT Sanjungan Emas Mulia",
+      "nameFromFile": false,
+      "description": "Company website for a gold enterprise dedicated to enhancing the value of Indonesian gold.",
+      "tech": [
+        "React JS",
+        "Tailwind"
+      ],
+      "links": {
+        "demo": "https://sanjunganemasmulia.com",
+        "github": null
+      },
+      "linkKinds": {
+        "demo": "site"
+      },
+      "image": {
+        "width": 1354,
+        "height": 611,
+        "aspect": 2.216,
+        "src": "/content/images/projects/sanjungan-800.10857c6d.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/sanjungan-480.10857c6d.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/sanjungan-800.10857c6d.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/sanjungan-1200.10857c6d.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/sanjungan-1354.10857c6d.avif",
+              "width": 1354
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/sanjungan-480.10857c6d.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/sanjungan-800.10857c6d.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/sanjungan-1200.10857c6d.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/sanjungan-1354.10857c6d.webp",
+              "width": 1354
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/sanjungan-tex512.10857c6d.webp",
+          "md": "/content/images/projects/sanjungan-tex1024.10857c6d.webp",
+          "lg": "/content/images/projects/sanjungan-1354.10857c6d.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAADwAwCdASoYAAsAPu1iqU2ppaOiMAgBMB2JZQAAW8aXXSpNM4z235IAAP7apgpgiXvk7M2HGZe+U58F1oqkuph00AE+HRUEI+u8E36WQ0/hKyXzaTO6EasvJ5UFufgEVPAdhgUTelAoAA==",
+        "dominant": "#585858",
+        "accent": "#b47a15",
+        "luminance": 0.272,
+        "alt": "Preview of PT Sanjungan Emas Mulia"
+      },
+      "source": {
+        "file": "src/views/PortfolioView.vue",
+        "image": "public/img/portfolio-sanjungan.png"
+      }
+    },
+    {
+      "id": "edukode",
+      "slug": "edukode",
+      "name": "Edukode",
+      "nameFromFile": false,
+      "description": "Interactive coding education platform inspired by Duolingo.",
+      "tech": [],
+      "links": {
+        "demo": "https://www.figma.com/proto/y14Uaktv77WBjrwAr5iPjt/Final-Project-Kelompok-6",
+        "github": null
+      },
+      "linkKinds": {
+        "demo": "prototype"
+      },
+      "image": {
+        "width": 854,
+        "height": 580,
+        "aspect": 1.4724,
+        "src": "/content/images/projects/edukode-800.5b036ee5.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/edukode-480.5b036ee5.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/edukode-800.5b036ee5.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/edukode-854.5b036ee5.avif",
+              "width": 854
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/edukode-480.5b036ee5.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/edukode-800.5b036ee5.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/edukode-854.5b036ee5.webp",
+              "width": 854
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/edukode-tex512.5b036ee5.webp",
+          "md": "/content/images/projects/edukode-tex1024.5b036ee5.webp",
+          "lg": "/content/images/projects/edukode-854.5b036ee5.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAAAQBQCdASoYABAAPu1iqU2ppaOiMAgBMB2JbACdL14UBi8Y3gXCy5OVkkH64NV9iDSAAMySvl5FTuRPxSGrbDQPVmjsvmhXBF5v2oGibHwFMRCm8JdThFLdmNUCr/1kaBR7gwwAmac/sSlHqo8Kwc3hcCY8Z+4cKelOP7/U2k5r0agWlvTsmKxuwwLMujIanjR9QmB4W8HHG8+dIpt0cesCv8hf7gj55PtgZf+iCU1ciF/Q3lXehP0Cm8xP3wNer8X666rRPXAjYAAA",
+        "dominant": "#f8f8f8",
+        "accent": "#664fea",
+        "luminance": 0.546,
+        "alt": "Preview of Edukode"
+      },
+      "source": {
+        "file": "src/views/PortfolioView.vue",
+        "image": "public/img/portfolio-edukode.png"
+      }
+    },
+    {
+      "id": "bangun",
+      "slug": "bangun",
+      "name": "Bangun",
+      "nameFromFile": true,
+      "description": null,
+      "tech": [],
+      "links": {
+        "demo": null,
+        "github": null
+      },
+      "linkKinds": {},
+      "image": {
+        "width": 1365,
+        "height": 643,
+        "aspect": 2.1229,
+        "src": "/content/images/projects/bangun-800.fc26f9e7.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/bangun-480.fc26f9e7.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/bangun-800.fc26f9e7.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/bangun-1200.fc26f9e7.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/bangun-1365.fc26f9e7.avif",
+              "width": 1365
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/bangun-480.fc26f9e7.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/bangun-800.fc26f9e7.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/bangun-1200.fc26f9e7.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/bangun-1365.fc26f9e7.webp",
+              "width": 1365
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/bangun-tex512.fc26f9e7.webp",
+          "md": "/content/images/projects/bangun-tex1024.fc26f9e7.webp",
+          "lg": "/content/images/projects/bangun-1365.fc26f9e7.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAwBACdASoYAAsAPu1krU2ppaSiMAgBMB2JbACdMoRwACmkGPNspFVB6aAA/B78rZIg645L2LIc51ydTVSQyIFgeLgtQtcUQe4TNv22XOBAJyLYk4/sfTWJa0Gm12FTDeId0kZ+TNqoRnapb+8RShtyXio2TVSnRvY4h1WH5bQ9gNy6PmcqWsQAAAA=",
+        "dominant": "#a84838",
+        "accent": "#cf2b42",
+        "luminance": 0.423,
+        "alt": "Preview of Bangun"
+      },
+      "source": {
+        "file": null,
+        "image": "public/img/portfolio-bangun.png"
+      }
+    },
+    {
+      "id": "bumi",
+      "slug": "bumi",
+      "name": "Bumi",
+      "nameFromFile": true,
+      "description": null,
+      "tech": [],
+      "links": {
+        "demo": null,
+        "github": null
+      },
+      "linkKinds": {},
+      "image": {
+        "width": 1350,
+        "height": 642,
+        "aspect": 2.1028,
+        "src": "/content/images/projects/bumi-800.ab066580.webp",
+        "sources": {
+          "avif": [
+            {
+              "src": "/content/images/projects/bumi-480.ab066580.avif",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/bumi-800.ab066580.avif",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/bumi-1200.ab066580.avif",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/bumi-1350.ab066580.avif",
+              "width": 1350
+            }
+          ],
+          "webp": [
+            {
+              "src": "/content/images/projects/bumi-480.ab066580.webp",
+              "width": 480
+            },
+            {
+              "src": "/content/images/projects/bumi-800.ab066580.webp",
+              "width": 800
+            },
+            {
+              "src": "/content/images/projects/bumi-1200.ab066580.webp",
+              "width": 1200
+            },
+            {
+              "src": "/content/images/projects/bumi-1350.ab066580.webp",
+              "width": 1350
+            }
+          ]
+        },
+        "texture": {
+          "sm": "/content/images/projects/bumi-tex512.ab066580.webp",
+          "md": "/content/images/projects/bumi-tex1024.ab066580.webp",
+          "lg": "/content/images/projects/bumi-1350.ab066580.webp"
+        },
+        "lqip": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAACQAwCdASoYAAsAPu1iqU2ppaQiMAgBMB2JaACdACHR+e3EXgUAAP5b1cBccRWSg7APmh6q3nB4ABfh74rNihA+2KFK9FTuYAaOW/jbKFltIFK+CpltvMv33eh3L7rxmZLTxw8ZXpw4iTZqPAAAAA==",
+        "dominant": "#f8f8f8",
+        "accent": "#7f870d",
+        "luminance": 0.588,
+        "alt": "Preview of Bumi"
+      },
+      "source": {
+        "file": null,
+        "image": "public/img/portfolio-bumi.png"
+      }
+    }
+  ]
+}

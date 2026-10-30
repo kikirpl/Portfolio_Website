@@ -1,0 +1,137 @@
+---
+import type { Content } from '../data/content';
+
+interface Props {
+  data: Content['experience'];
+}
+
+const { heading, subheading, items } = Astro.props.data;
+---
+
+<section id="experience" class="experience section" data-section="experience" aria-labelledby="experience-title">
+  <header class="section-intro experience__intro" data-stop="experience">
+    <h2 id="experience-title" class="section-title" tabindex="-1" data-reveal="wipe">{heading ?? 'Experience'}</h2>
+    {subheading && <p class="section-sub" data-reveal>{subheading}</p>}
+  </header>
+
+  <ol class="timeline">
+    {
+      items.map((entry) => (
+        <li class="entry" data-stop={`exp:${entry.index}`}>
+          <article class="panel entry__panel" data-reveal>
+            <h3 class="entry__role">{entry.role}</h3>
+            <p class="entry__meta">
+              {entry.company && <span class="entry__company">{entry.company}</span>}
+              {entry.period && (
+                <span class="entry__period data" data-start={entry.start} data-end={entry.end}>
+                  {entry.period}
+                </span>
+              )}
+            </p>
+            {entry.description && <p class="entry__desc">{entry.description}</p>}
+          </article>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .experience__intro {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    min-height: 80svh;
+    text-align: center;
+  }
+
+  .experience__intro .section-sub {
+    margin-inline: auto;
+  }
+
+  .entry {
+    display: flex;
+    align-items: center;
+    min-height: 80svh;
+  }
+
+  .entry__role {
+    color: var(--text-1);
+    font-size: var(--step-2);
+    font-weight: 650;
+    font-stretch: 112%;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .entry__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 1rem;
+    margin-top: 0.6rem;
+  }
+
+  .entry__company {
+    color: var(--text-1);
+    font-size: var(--step-1);
+    font-weight: 450;
+  }
+
+  .entry__period {
+    color: var(--accent);
+  }
+
+  .entry__desc {
+    margin-top: 1rem;
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+
+  @media (max-aspect-ratio: 17/20) {
+    :global(.mode-3d) .entry {
+      align-items: flex-end;
+      min-height: 96svh;
+      padding-bottom: 9svh;
+    }
+  }
+
+  /* 2D version: a plain vertical timeline. */
+  :global(.mode-2d) .experience__intro,
+  :global(.no-js) .experience__intro {
+    min-height: auto;
+    padding-block: clamp(5rem, 12vw, 9rem) clamp(2rem, 5vw, 3rem);
+  }
+
+  :global(.mode-2d) .timeline,
+  :global(.no-js) .timeline {
+    max-width: 60rem;
+    margin-inline: auto;
+    border-left: 1px solid var(--line-strong);
+  }
+
+  :global(.mode-2d) .entry,
+  :global(.no-js) .entry {
+    position: relative;
+    min-height: auto;
+    padding: 0 0 clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  }
+
+  :global(.mode-2d) .entry::before,
+  :global(.no-js) .entry::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0.85rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  :global(.mode-2d) .entry__panel,
+  :global(.no-js) .entry__panel {
+    max-width: none;
+  }
+</style>

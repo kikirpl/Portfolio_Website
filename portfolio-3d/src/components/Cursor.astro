@@ -1,0 +1,73 @@
+<div class="cursor" aria-hidden="true" data-cursor>
+  <span class="cursor__ring"></span>
+  <span class="cursor__label label" data-cursor-label>View</span>
+</div>
+
+<style>
+  .cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 70;
+    display: none;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  :global(.has-cursor) .cursor {
+    display: block;
+  }
+
+  .cursor__ring {
+    position: absolute;
+    left: -1.1rem;
+    top: -1.1rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 1px solid rgb(238 241 247 / 0.45);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.4);
+    transition:
+      transform 420ms var(--ease-out),
+      opacity 300ms var(--ease-out),
+      border-color 300ms var(--ease-out),
+      background-color 300ms var(--ease-out);
+  }
+
+  .cursor__label {
+    position: absolute;
+    left: 1.6rem;
+    top: -0.55rem;
+    padding: 0.2rem 0.45rem;
+    border-radius: 3px;
+    background: var(--accent);
+    color: var(--ink-0);
+    opacity: 0;
+    transform: translateX(-0.4rem);
+    transition:
+      opacity 250ms var(--ease-out),
+      transform 250ms var(--ease-out);
+  }
+
+  .cursor.is-visible .cursor__ring {
+    opacity: 1;
+    transform: scale(0.55);
+  }
+
+  .cursor.is-link .cursor__ring {
+    transform: scale(1);
+    border-color: var(--accent);
+  }
+
+  .cursor.is-view .cursor__ring {
+    transform: scale(1.5);
+    border-color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 14%, transparent);
+  }
+
+  .cursor.is-view .cursor__label {
+    opacity: 1;
+    transform: none;
+  }
+</style>

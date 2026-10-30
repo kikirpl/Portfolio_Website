@@ -1,0 +1,67 @@
+{
+  "heading": "Professional Experience",
+  "subheading": "My journey in technology and development",
+  "order": "start-desc",
+  "items": [
+    {
+      "id": "3",
+      "role": "Front-End Web Developer",
+      "company": "PT. Sanjungan Emas Mulia",
+      "period": "Aug 2025 - Sep 2025",
+      "start": "2025-08",
+      "end": "2025-09",
+      "ongoing": false,
+      "description": "Developed a responsive React.js website with reusable components and React Hooks for state management. Integrated real-time gold price APIs, optimized performance with code splitting and lazy loading, and maintained production deployment."
+    },
+    {
+      "id": "1",
+      "role": "Web3 Fullstack Developer",
+      "company": "MYGOLD Token",
+      "period": "Jul 2025 - Sep 2025",
+      "start": "2025-07",
+      "end": "2025-09",
+      "ongoing": false,
+      "description": "Developed a Web3 cryptocurrency platform using React.js and Tailwind CSS. Implemented wallet connection features, multilingual interface (i18n), and integrated GemPad for token transactions. Deployed the platform using Docker on a VPS and collaborated with international developers."
+    },
+    {
+      "id": "4",
+      "role": "Front-End Web Developer",
+      "company": "PT. Baraka Dhahabu Africa",
+      "period": "Jul 2025 - Aug 2025",
+      "start": "2025-07",
+      "end": "2025-08",
+      "ongoing": false,
+      "description": "Built a responsive web platform using React.js with modular components and API integration for real-time gold price updates. Implemented bilingual support (Indonesian-English) using i18n and managed production deployment."
+    },
+    {
+      "id": "2",
+      "role": "Front-End Web Developer",
+      "company": "PT. Bumi Pangan Export",
+      "period": "Jun 2025 - Jul 2025",
+      "start": "2025-06",
+      "end": "2025-07",
+      "ongoing": false,
+      "description": "Built a responsive company website using React.js with multilingual support (Mandarin, English, Indonesian). Optimized performance using lazy loading and bundle optimization, and deployed the website on Hostinger with full hosting, domain, and SSL configuration."
+    },
+    {
+      "id": "5",
+      "role": "Fullstack Web Developer Intern",
+      "company": "PT Teknomadya Solusi Teknologi",
+      "period": "Jun 2024 - Dec 2024",
+      "start": "2024-06",
+      "end": "2024-12",
+      "ongoing": false,
+      "description": "Developed an integrated dashboard system using Next.js for work order management and scheduling. Built real-time interfaces connecting admin and worker portals. Also created a Python web scraping system to migrate 25,000+ e-commerce product data."
+    },
+    {
+      "id": "6",
+      "role": "Fullstack Web & Mobile Development Training",
+      "company": "ITBOX Academy",
+      "period": "Jan 2023 - Jun 2025",
+      "start": "2023-01",
+      "end": "2025-06",
+      "ongoing": false,
+      "description": "Completed intensive training in fullstack web development using JavaScript, React.js, Express.js, PostgreSQL, and REST APIs. Built multiple fullstack applications and also developed cross-platform mobile apps using Flutter and Dart."
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+---
+import Icon from './Icon.astro';
+import { withBase } from '../data/content';
+
+interface Props {
+  brand: string | null;
+  name: string;
+  cv: { label: string | null; href: string } | null;
+  links: { id: string; label: string }[];
+}
+
+const { brand, name, cv, links } = Astro.props;
+---
+
+<header class="header" data-header>
+  <a class="brand" href="#top">
+    {brand ?? name}
+    {brand && <span class="sr-only">, {name}, back to top</span>}
+  </a>
+
+  <p class="header__now label" aria-hidden="true" data-now>Intro</p>
+
+  <nav class="nav" aria-label="Sections">
+    <button
+      class="nav__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-list"
+      data-nav-toggle
+    >
+      <span class="nav__toggle-label">Menu</span>
+      <Icon name="menu" />
+    </button>
+    <ul class="nav__list" id="nav-list" data-nav-list>
+      {
+        links.map((link) => (
+          <li>
+            <a class="nav__link" href={`#${link.id}`} data-nav-link={link.id}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      {
+        cv && (
+          <li class="nav__cv">
+            <a class="btn" href={withBase(cv.href)} target="_blank" rel="noopener">
+              CV
+              <Icon name="download" />
+              <span class="sr-only">{cv.label ?? 'CV'} (PDF, opens in a new tab)</span>
+            </a>
+          </li>
+        )
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: var(--header-h);
+    padding-inline: var(--gutter);
+    background: linear-gradient(to bottom, rgb(7 8 11 / 0.96), rgb(7 8 11 / 0.8) 55%, transparent);
+  }
+
+  .brand {
+    color: var(--text-1);
+    font-size: 1.0625rem;
+    font-weight: 800;
+    font-stretch: 125%;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 0.5rem 0;
+  }
+
+  .header__now {
+    display: none;
+    color: var(--text-3);
+  }
+
+  .nav {
+    margin-left: auto;
+  }
+
+  .nav__toggle {
+    display: none;
+  }
+
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.4vw, 2.25rem);
+  }
+
+  .nav__link {
+    position: relative;
+    display: inline-block;
+    padding: 0.6rem 0;
+    color: var(--text-2);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 200ms var(--ease-out);
+  }
+
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.3rem;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 500ms var(--ease-out);
+  }
+
+  .nav__link:hover {
+    color: var(--text-1);
+  }
+
+  .nav__link[aria-current='true'] {
+    color: var(--text-1);
+  }
+
+  .nav__link[aria-current='true']::after {
+    transform: scaleX(1);
+  }
+
+  .nav__cv .btn {
+    min-height: 2.5rem;
+    padding-inline: 0.9rem;
+  }
+
+  @media (max-width: 760px) {
+    .header {
+      background: rgb(7 8 11 / 0.94);
+    }
+
+    .header__now {
+      display: block;
+    }
+
+    .nav__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 2.75rem;
+      padding: 0 0.25rem 0 0.75rem;
+      border: 0;
+      background: none;
+      color: var(--text-1);
+      font-size: 0.9375rem;
+      font-weight: 550;
+      cursor: pointer;
+    }
+
+    .nav__list {
+      position: fixed;
+      inset: var(--header-h) 0 auto;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0.5rem var(--gutter) 1.75rem;
+      background: var(--ink-0);
+      border-bottom: 1px solid var(--line);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-0.5rem);
+      transition:
+        opacity 260ms var(--ease-out),
+        transform 260ms var(--ease-out),
+        visibility 0s linear 260ms;
+    }
+
+    .nav__list.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition:
+        opacity 260ms var(--ease-out),
+        transform 260ms var(--ease-out);
+    }
+
+    .nav__link {
+      display: block;
+      padding: 0.85rem 0;
+      color: var(--text-1);
+      font-size: 1.5rem;
+      font-weight: 620;
+      font-stretch: 115%;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav__link::after {
+      display: none;
+    }
+
+    .nav__link[aria-current='true'] {
+      color: var(--accent);
+    }
+
+    .nav__cv {
+      margin-top: 1.25rem;
+    }
+  }
+</style>

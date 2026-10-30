@@ -1,0 +1,96 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  name: string;
+  signature: string | null;
+}
+
+const { name, signature } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__row">
+    {signature && <p class="footer__sig data">{signature}</p>}
+    <p class="footer__copy">© {year} {name}</p>
+  </div>
+  <div class="footer__row">
+    <button class="footer__view" type="button" data-view-toggle>
+      <Icon name="square" class="footer__view-2d" />
+      <Icon name="cube" class="footer__view-3d" />
+      <span class="footer__view-2d">Switch to 2D view</span>
+      <span class="footer__view-3d">Switch to 3D view</span>
+    </button>
+    <a class="footer__top" href="#top">
+      Back to top
+      <Icon name="arrow-up" />
+    </a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding: 2rem var(--gutter) 2.5rem;
+    border-top: 1px solid var(--line);
+    background: var(--ink-0);
+    color: var(--text-3);
+    font-size: 0.875rem;
+  }
+
+  .footer__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.75rem;
+  }
+
+  .footer__sig {
+    color: var(--text-2);
+  }
+
+  .footer__view,
+  .footer__top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text-2);
+    font-size: 0.875rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 200ms var(--ease-out);
+  }
+
+  .footer__view:hover,
+  .footer__top:hover {
+    color: var(--text-1);
+  }
+
+  .footer__view :global(.footer__view-3d),
+  .footer__view .footer__view-3d {
+    display: none;
+  }
+
+  :global(.mode-2d) .footer__view :global(.footer__view-2d),
+  :global(.mode-2d) .footer__view .footer__view-2d {
+    display: none;
+  }
+
+  :global(.mode-2d) .footer__view :global(.footer__view-3d),
+  :global(.mode-2d) .footer__view .footer__view-3d {
+    display: inline;
+  }
+
+  :global(.no-webgl) .footer__view,
+  :global(.no-js) .footer__view {
+    display: none;
+  }
+</style>

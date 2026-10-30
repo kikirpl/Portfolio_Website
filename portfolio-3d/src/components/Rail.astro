@@ -1,0 +1,145 @@
+---
+interface Props {
+  links: { id: string; label: string }[];
+}
+const { links } = Astro.props;
+const marks = [{ id: 'top', label: 'Intro' }, ...links];
+---
+
+<nav class="rail" aria-label="Page position" data-rail>
+  <ol class="rail__list">
+    {
+      marks.map((mark) => (
+        <li>
+          <a class="rail__mark" href={`#${mark.id}`} data-rail-mark={mark.id === 'top' ? 'hero' : mark.id}>
+            <span class="rail__label">{mark.label}</span>
+            <span class="rail__tick" aria-hidden="true" />
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+  <div class="rail__meter" aria-hidden="true">
+    <span class="rail__fill" data-rail-fill></span>
+  </div>
+</nav>
+
+<style>
+  .rail {
+    position: fixed;
+    right: clamp(0.75rem, 2vw, 1.75rem);
+    top: 50%;
+    z-index: 30;
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+    transform: translateY(-50%);
+  }
+
+  .rail__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+
+  .rail__mark {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    min-height: 2rem;
+    padding-left: 1rem;
+    color: var(--text-3);
+    text-decoration: none;
+  }
+
+  .rail__label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    transform: translateX(6px);
+    transition:
+      opacity 300ms var(--ease-out),
+      transform 300ms var(--ease-out),
+      color 300ms var(--ease-out);
+  }
+
+  .rail__tick {
+    width: 0.75rem;
+    height: 1px;
+    background: currentColor;
+    transition:
+      width 500ms var(--ease-out),
+      background-color 300ms var(--ease-out);
+  }
+
+  .rail__mark:hover .rail__label,
+  .rail__mark:focus-visible .rail__label,
+  .rail__mark[aria-current='true'] .rail__label {
+    opacity: 1;
+    transform: none;
+  }
+
+  .rail__mark:hover {
+    color: var(--text-1);
+  }
+
+  .rail__mark[aria-current='true'] {
+    color: var(--text-1);
+  }
+
+  .rail__mark[aria-current='true'] .rail__tick {
+    width: 1.75rem;
+    background: var(--accent);
+  }
+
+  .rail__meter {
+    position: relative;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .rail__fill {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(var(--progress, 0));
+    transform-origin: top;
+  }
+
+  @media (max-width: 900px) {
+    .rail {
+      top: var(--header-h);
+      right: 0;
+      left: 0;
+      transform: none;
+      height: 2px;
+    }
+
+    .rail__list {
+      display: none;
+    }
+
+    .rail__meter {
+      flex: 1;
+      width: auto;
+      height: 1px;
+    }
+
+    .rail__fill {
+      transform: scaleX(var(--progress, 0));
+      transform-origin: left;
+    }
+  }
+
+  :global(.mode-2d) .rail__list {
+    display: none;
+  }
+
+  :global(.no-js) .rail {
+    display: none;
+  }
+</style>

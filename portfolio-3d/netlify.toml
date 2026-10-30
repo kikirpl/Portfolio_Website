@@ -1,0 +1,18 @@
+# Used when portfolio-3d is the Netlify base directory (or its own repository).
+# In this repository the root netlify.toml already points Netlify here; keep both in sync.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/content/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
