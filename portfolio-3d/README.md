@@ -88,7 +88,7 @@ Situs ini statis; folder hasil build adalah `portfolio-3d/dist`. Atur `SITE_URL`
 
 **Vercel:** Import repo → *Root Directory* = `portfolio-3d` → framework Astro terdeteksi otomatis → Deploy.
 
-**Netlify:** Import repo → *Base directory* = `portfolio-3d` (perintah build dan folder publish dibaca dari `netlify.toml`).
+**Netlify:** repo ini punya `netlify.toml` di root yang mengarahkan build ke `portfolio-3d` (Node 22, `npm run build`, folder `dist`), jadi situs Netlify yang sudah tersambung langsung memakai versi baru tanpa mengubah pengaturan apa pun. Setiap pull request otomatis mendapat *deploy preview*. Untuk kembali ke situs lama, hapus `netlify.toml` di root. Kalau proyek ini dipindah ke repo sendiri, `portfolio-3d/netlify.toml` dipakai.
 
 **GitHub Pages:** salin `deploy/github-pages.yml` ke `.github/workflows/deploy.yml` di root repo, lalu di *Settings → Pages* pilih sumber *GitHub Actions*. Workflow itu mengisi `SITE_URL` dan `BASE_PATH=/<nama-repo>/` (dibutuhkan karena situs berada di sub-path). Untuk domain kustom, pakai `BASE_PATH=/`.
 
